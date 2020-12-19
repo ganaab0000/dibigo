@@ -10,6 +10,9 @@
     margin-right: 10px;
 }
 
+.left-margin-3-pt {
+    margin-left:-3% !important;
+}
 .top-margin-10 {
     margin-top: 10px;
 }
@@ -81,18 +84,13 @@ i.material-icons {
     vertical-align: middle;
 }
 
-
 .vertical-align-center {
     vertical-align: middle !important;
 }
 
-/* .line-height-nav {
-    line-height: 120%;
-} */
-
 .line-height-btn {
-    /* line-height: 200% !important; */
-    height: 36px; line-height: 36px;
+    height: 36px;
+    line-height: 36px;
 }
 
 .search-btn {
