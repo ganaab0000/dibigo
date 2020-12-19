@@ -46,6 +46,8 @@
     opacity: 0.2;
 } */
 
+.cursor-pointer { cursor: pointer; }
+
 .shadow-txt {
     text-shadow: 2px 2px 5px grey !important;
 }

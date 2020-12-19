@@ -14,6 +14,37 @@
         $(document).ready(function () {
             $('.materialboxed').materialbox();
             $('.slider').slider({ height: 560 });
+            $('.slides').on('click', function () {
+                // if already full screen; exit
+                // else go fullscreen
+                if (
+                    document.fullscreenElement ||
+                    document.webkitFullscreenElement ||
+                    document.mozFullScreenElement ||
+                    document.msFullscreenElement
+                ) {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                } else {
+                    element = $('.slides').get(0);
+                    if (element.requestFullscreen) {
+                        element.requestFullscreen();
+                    } else if (element.mozRequestFullScreen) {
+                        element.mozRequestFullScreen();
+                    } else if (element.webkitRequestFullscreen) {
+                        element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                    } else if (element.msRequestFullscreen) {
+                        element.msRequestFullscreen();
+                    }
+                }
+            });
         });
     </script>
 </head>
@@ -56,9 +87,8 @@
         </div>
         <div class="col s0 m1"></div>
     </div>
-
     <div class="slider">
-        <ul class="slides">
+        <ul class="slides cursor-pointer">
             <li>
                 <img src="https://placeimg.com/600/360/spring"> <!-- random image -->
                 <div class="caption center-align shadow-txt">
