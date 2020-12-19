@@ -12,32 +12,32 @@
     <script>
         $(document).ready(function () {
             $('.materialboxed').materialbox();
-            $('.slider').slider();
+            $('.slider').slider({height:560});
         });
     </script>
 </head>
 <body class="min-width-500">
     <div class="top-padding-20">
         <div class="row line-height-btn">
+            <div class="col s0 m1"></div>
             <div class="col s3 m2 teal-text font-size-20"><i class="material-icons">image</i> DBIGO</div>
-            <div class="col s0 m3 teal-text timer-display-none">전국 방방곡곡, 디비고~</div>
-            <div class="col s9 m7 right-align ">
-                <span class="waves-effect waves-teal btn-flat right-margin-10 teal-text"><i
-                        class="material-icons">create</i> 일정</span>
-                <span class="waves-effect waves-teal btn-flat right-margin-10"><i
-                        class="material-icons">help_outline</i> 사용법</span>
-                <span class="waves-effect waves-teal btn-flat right-margin-10"><i
-                        class="material-icons">account_circle</i> 로그인</span>
+            <div class="col s0 m3 teal-text">전국 방방곡곡, 디비고~</div>
+            <div class="col s9 m5 right-align ">
+                <span class="waves-effect waves-teal btn-flat right-margin-10 teal-text"><i class="material-icons">create</i> 일정</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i class="material-icons">help_outline</i> 사용법</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i class="material-icons">account_circle</i> 로그인</span>
             </div>
+            <div class="col s0 m1"></div>
         </div>
     </div>
-    <div class="top-padding-20 row white-text blue-grey darken-2">
+    <div class="top-padding-20 row white-text blue-grey darken-2 margin-0">
         <div class="col s0 m1"></div>
         <div class="col s12 m10">
             <div class="row center-align">
-                <div class="col s4 m2">추천콘텐츠</div>
-                <div class="col s4 m2">여행꿀팁</div>
-                <div class="col s4 m2">Q&A</div>
+                <div class="col s3 m2">신간</div>
+                <div class="col s3 m2">베스트</div>
+                <div class="col s3 m2">여행꿀팁</div>
+                <div class="col s3 m2">Q&A</div>
             </div>
             <div class="row">
                 <div class="col s12 m11">
@@ -51,44 +51,46 @@
         </div>
         <div class="col s0 m1"></div>
     </div>
+    <div class="slider">
+        <ul class="slides">
+            <li>
+                <img src="https://placeimg.com/600/360/spring"> <!-- random image -->
+                <div class="caption center-align shadow-txt">
+                    <h3>This is our big Tagline!</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                </div>
+            </li>
+            <li>
+                <img src="https://placeimg.com/600/360/summer"> <!-- random image -->
+                <div class="caption left-align shadow-txt">
+                    <h3>Left Aligned Caption</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                </div>
+            </li>
+            <li>
+                <img src="https://placeimg.com/600/360/fall"> <!-- random image -->
+                <div class="caption right-align shadow-txt">
+                    <h3>Right Aligned Caption</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                </div>
+            </li>
+            <li>
+                <img src="https://placeimg.com/600/360/winter"> <!-- random image -->
+                <div class="caption center-align shadow-txt">
+                    <h3>This is our big Tagline!</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                </div>
+            </li>
+        </ul>
+    </div>
+
     <div class="row">
         <div class="col s0 m1"></div>
         <div class="col s12 m10">
             <div class="row grey-text ">
                 <div class="col s12">전세계 > 추천콘텐츠</div>
             </div>
-            <div class="slider">
-                <ul class="slides">
-                    <li>
-                        <img src="https://placeimg.com/600/360/spring"> <!-- random image -->
-                        <div class="caption center-align">
-                            <h3>This is our big Tagline!</h3>
-                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="https://placeimg.com/600/360/summer"> <!-- random image -->
-                        <div class="caption left-align">
-                            <h3>Left Aligned Caption</h3>
-                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="https://placeimg.com/600/360/fall"> <!-- random image -->
-                        <div class="caption right-align">
-                            <h3>Right Aligned Caption</h3>
-                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="https://placeimg.com/600/360/winter"> <!-- random image -->
-                        <div class="caption center-align">
-                            <h3>This is our big Tagline!</h3>
-                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            
             <div class="section">
                 <h5>신간 여행기</h5>
                 <div class="row">
@@ -190,7 +192,7 @@
             </div>
             <div class="divider"></div>
             <div class="section">
-                <h5>여행 꿀팁</h5>
+                <h5>베스트 여행기</h5>
                 <div class="row">
                     <div class="col s12 m12">
                         <div class="row">
@@ -290,7 +292,7 @@
             </div>
             <div class="divider"></div>
             <div class="section">
-                <h5>베스트 여행기</h5>
+                <h5>여행 꿀팁</h5>
                 <div class="row">
                     <div class="col s12 m12">
                         <div class="row">
@@ -391,6 +393,9 @@
         </div>
         <div class="col s0 m1"></div>
     </div>
+
+
+
     <div class="top-padding-20 row white-text blue-grey darken-2 margin-0">
         <div class="col s0 m1"></div>
         <div class="col s12 m10">
