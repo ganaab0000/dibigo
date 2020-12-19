@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="./css/dibigo-hj.css" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            $('.materialboxed').materialbox();
+            $('.slider').slider({ height: 560 });
+        });
+    </script>
 </head>
+
 <body class="min-width-500">
     <div class="top-padding-20">
         <div class="row line-height-btn">
@@ -17,9 +25,12 @@
             <div class="col s3 m2 teal-text font-size-20"><i class="material-icons">image</i> DBIGO</div>
             <div class="col s0 m3 teal-text">전국 방방곡곡, 디비고~</div>
             <div class="col s9 m5 right-align ">
-                <span class="waves-effect waves-teal btn-flat right-margin-10 teal-text"><i class="material-icons">create</i> 일정</span>
-                <span class="waves-effect waves-teal btn-flat right-margin-10"><i class="material-icons">help_outline</i> 사용법</span>
-                <span class="waves-effect waves-teal btn-flat right-margin-10"><i class="material-icons">account_circle</i> 로그인</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10 teal-text"><i
+                        class="material-icons">create</i> 일정</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i
+                        class="material-icons">help_outline</i> 사용법</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i
+                        class="material-icons">account_circle</i> 로그인</span>
             </div>
             <div class="col s0 m1"></div>
         </div>
@@ -45,6 +56,33 @@
         </div>
         <div class="col s0 m1"></div>
     </div>
+
+    <div class="slider">
+        <ul class="slides">
+            <li>
+                <img src="https://placeimg.com/600/360/spring"> <!-- random image -->
+                <div class="caption center-align shadow-txt">
+                    <h3>집에서 세계 여행 기분 내기</h3>
+                    <h5 class="light grey-text text-lighten-3">독일,영국,프랑스,미국 * 1일 * 여행전</h5>
+                </div>
+            </li>
+            <li>
+                <img src="https://placeimg.com/600/360/summer"> <!-- random image -->
+                <div class="caption left-align shadow-txt">
+                    <h3>집에서 세계 여행 기분 내기</h3>
+                    <h5 class="light grey-text text-lighten-3">독일,영국,프랑스,미국 * 1일 * 여행전</h5>
+                </div>
+            </li>
+            <li>
+                <img src="https://placeimg.com/600/360/fall"> <!-- random image -->
+                <div class="caption right-align shadow-txt">
+                    <h3>집에서 세계 여행 기분 내기</h3>
+                    <h5 class="light grey-text text-lighten-3">독일,영국,프랑스,미국 * 1일 * 여행전</h5>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- 
     <div class="white-text">
         <div class="row">
             <div class="margin-0">
@@ -58,6 +96,7 @@
             </div>
         </div>
     </div>
+     -->
     <div class="row">
         <div class="col s0 m1"></div>
         <div class="col s12 m10">
@@ -277,7 +316,8 @@
                 </div>
                 <div class="col s12 m1 center-align sticky-layer">
                     <div class="collection" class="font-size-13 ">
-                        <a href="#!" class="collection-item side-padding-5"><i class="material-icons">keyboard_arrow_up</i></a>
+                        <a href="#!" class="collection-item side-padding-5"><i
+                                class="material-icons">keyboard_arrow_up</i></a>
                         <a href="#!" class="collection-item side-padding-5">Day 1</a>
                         <a href="#!" class="collection-item side-padding-5">Day 2</a>
                         <a href="#!" class="collection-item side-padding-5"><i class="material-icons">comment</i> 1</a>
@@ -306,4 +346,5 @@
         <div class="col s0 m1"></div>
     </div>
 </body>
+
 </html>
