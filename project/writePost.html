@@ -17,8 +17,18 @@
         $(document).ready(function () {
             $('input#title').characterCounter();
             $('input#title').focus();
-            $('.datepicker').datepicker();
-
+            // $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                firstDay: true,
+                format: 'yyyy-mm-dd',
+                i18n: {
+                    months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                    monthsShort:  ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                    weekdays: ["토", "일", "월", "화", "수", "목", "금"],
+                    weekdaysShort: ["토", "일", "월", "화", "수", "목", "금"],
+                    weekdaysAbbrev: ["토", "일", "월", "화", "수", "목", "금"]
+                }
+            });
             ClassicEditor
                 .create(document.querySelector('.editor'), {
                     placeholder: '당신의 이야기를 들려주세요.',
@@ -88,27 +98,22 @@
         <div class="col s0 m1"></div>
         <div class="col s12 m10">
 
-            <!-- <div class="row grey-text ">
-                <div class="col s12">전세계 > 추천콘텐츠</div>
-            </div> -->
-
             <div class="row">
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="title" class="teal-text" type="text" data-length="30">
-                            <!-- placeholder="" -->
                             <label for="title">제목</label>
                         </div>
 
-                        <div class="input-field col s12 m6">
-                            <input id="datetime" type="text" class="datepicker">
-                            <label for="datetime">일정 시작</label>
+                        <div class="input-field col s12">
+                            <input id="datetime" type="text" class="datepicker teal-text">
+                            <label for="datetime">일정</label>
                         </div>
-                        <div class="input-field col s12 m6">
+                        <!-- <div class="input-field col s12 m6">
                             <input id="datetime" type="text" class="datepicker">
                             <label for="datetime">일정 끝</label>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="editor">
