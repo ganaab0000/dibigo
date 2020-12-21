@@ -12,10 +12,10 @@
     <link href="./css/dibigo-hj.css" rel="stylesheet">
     <!-- <script src="./js/ckeditor5/build/ckeditor.js"></script> -->
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/balloon-block/ckeditor.js"></script> -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script> -->
     <script>
         $(document).ready(function () {
-            $('input#title, #content').characterCounter();
+            $('input#title, #content_txt').characterCounter();
             $('input#title').focus();
             // $('input#content').characterCounter();
 
@@ -71,7 +71,8 @@
                             <input id="title" class="teal-text" type="text" data-length="30">
                             <label for="title">여행일정 제목</label>
                         </div>
-
+                    </div>
+                    <div class="row">
                         <div class="input-field col s12 m6">
                             <input id="datetime" type="text" class="datepicker teal-text">
                             <label for="datetime">일정 시작</label>
@@ -80,14 +81,12 @@
                             <input id="datetime" type="text" class="datepicker teal-text">
                             <label for="datetime">일정 끝</label>
                         </div>
-
-
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="content" class="materialize-textarea" data-length="300"></textarea>
-                            <label for="content">내용</label>
+                            <textarea id="content_txt" class="materialize-textarea" data-length="300"></textarea>
+                            <label for="content_txt">내용</label>
                         </div>
                     </div>
 
