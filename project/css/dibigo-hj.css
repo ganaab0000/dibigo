@@ -51,10 +51,15 @@
     border: 0px solid grey !important;
     /* background-color: white !important; */
     /* box-shadow: 0px !important; */
+}
+.ck-content{
     padding-left: 0px !important;
 }
 .ck-toolbar{
+    padding-left: 0px !important;
     background-color: white !important;
+    border: none !important; 
+    box-shadow: none !important;
 }
 div.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
     outline: none;
@@ -78,6 +83,8 @@ div.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
 .ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
     /* position: unset; */
     top: 70px !important;
+    border: none !important; 
+    box-shadow: none !important;
 }
 
 
