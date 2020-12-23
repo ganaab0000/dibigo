@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>여행 꿀팁 | 전국 방방곡곡 디비고</title>
+    <title>관리자 | 전국 방방곡곡 디비고</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="./css/materialize.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -28,10 +28,12 @@
             });
 
             function render() {
-                renderChart_tmp_2("#my_dataviz");
-                renderChart_tmp("#my_dataviz_2");
-                renderChart_tmp("#my_dataviz_3");
+                renderChart_tmp_2("#my_dataviz_1");
+                renderChart_tmp_1("#my_dataviz_2");
+                renderChart_tmp_1("#my_dataviz_3");
                 renderChart_tmp_2("#my_dataviz_4");
+                renderChart_tmp_2("#my_dataviz_5");
+                renderChart_tmp_2("#my_dataviz_6");
             }
             function renderChart_tmp_2(elName) {
 
@@ -47,23 +49,6 @@
                     .attr("height", height)
                     .attr('viewBox', '0 0 ' + (width + 0) + ' ' + (height + margin + 100))
                     .append("g");
-                // .attr('preserveAspectRatio', 'xMinYMin')
-                // .attr("transform", "translate(" + 5 + "," +5 + ")")
-
-                // set the dimensions and margins of the graph
-                // var margin = { top: 10, right: 30, bottom: 90, left: 40 },
-                //     width = 460 - margin.left - margin.right,
-                //     height = 450 - margin.top - margin.bottom;
-
-
-                // append the svg object to the body of the page
-                // var svg = d3.select("#my_dataviz")
-                //     .append("svg")
-                //     .attr("width", width + margin.left + margin.right)
-                //     .attr("height", height + margin.top + margin.bottom)
-                //     .append("g")
-                //     .attr("transform",
-                //         "translate(" + margin.left + "," + margin.top + ")");
 
                 // Parse the Data
                 d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function (data) {
@@ -109,7 +94,7 @@
 
                 })
             }
-            function renderChart_tmp(elName) {
+            function renderChart_tmp_1(elName) {
                 $(elName).empty();
                 var $container = $(elName),
                     width = $container.width(),
@@ -122,25 +107,6 @@
                     .attr("height", height)
                     .attr('viewBox', '0 0 ' + (width + 0) + ' ' + (height + margin + 100))
                     .append("g");
-                // .attr('preserveAspectRatio', 'xMinYMin')
-                // .attr("transform", "translate(" + 5 + "," +5 + ")")
-
-                // var svg = d3.select("#my_dataviz")
-                //     .append("svg")
-                //     .attr("width", width)
-                //     .attr("height", height)
-                //     .append("g")
-                //     .attr("transform",
-                //         "translate(" + margin.left + "," + margin.top + ")");
-
-                // var svg = d3.select("#my_dataviz")
-                //     .append("svg")
-                //     .attr("width", width + margin.left + margin.right)
-                //     .attr("height", height + margin.top + margin.bottom)
-                //     .append("g")
-                //     .attr("transform",
-                //         "translate(" + margin.left + "," + margin.top + ")");
-
 
                 // get the data
                 d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_doubleHist.csv", function (data) {
@@ -269,35 +235,54 @@
         <div class="col s0 m1"></div>
         <div class="col s12 m10">
             <div class="row grey-text ">
-                <div class="col s12">전세계 > 여행꿀팁</div>
+                <div class="col s12">관리자 > 대시보드</div>
             </div>
             <div class="row">
-                <div class="col s12 m2">
+
+                <!-- <div class="col s12 m2">
                     <div class="collection">
                         <a href="#!" class="collection-item active">대시보드</a>
                         <a href="#!" class="collection-item">게시물 관리</a>
                         <a href="#!" class="collection-item">사용자 관리</a>
                         <a href="#!" class="collection-item">설정</a>
                     </div>
-                </div>
-                <div class="col s12 m10">
+                </div> -->
+                <div class="col s12 m12">
 
-                    <div class="row">
-                        <div class="col s12 m6">
-                            <div id="my_dataviz"></div>
-                        </div>
-                        <div class="col s12 m6">
-                            <div id="my_dataviz_2"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12 m6">
-                            <div id="my_dataviz_3"></div>
-                        </div>
-                        <div class="col s12 m6">
-                            <div id="my_dataviz_4"></div>
+                    <div class="section">
+                        <h5>시간별 방문자</h5>
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <div id="my_dataviz_1"></div>
+                            </div>
+                            <div class="col s12 m6">
+                                <div id="my_dataviz_2"></div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="section">
+                        <h5>시간별 글 작성</h5>
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <div id="my_dataviz_3"></div>
+                            </div>
+                            <div class="col s12 m6">
+                                <div id="my_dataviz_4"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h5>가입자 증가추이</h5>
+                        <div class="col s12 m6">
+                            <div id="my_dataviz_5"></div>
+                        </div>
+                        <div class="col s12 m6">
+                            <div id="my_dataviz_6"></div>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
