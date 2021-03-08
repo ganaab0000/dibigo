@@ -1,0 +1,245 @@
+/*
+
+*/
+
+@media (max-width: 800px) {
+    .timer-display-none {
+        display: none;
+    }
+
+    .timer-width-full {
+        width: 100% !important;
+    }
+
+    .row .col.s0 {
+        display: none;
+    }
+
+    .row .col.m0 {
+        display: none;
+    }
+}
+
+.min-width-500 {
+    min-width: 500px;
+}
+
+.z-index-10 {
+    z-index: 10;
+}
+
+
+.ck {
+    color: #555;
+    font-size: 20px; 
+    border: 0px solid grey !important;
+}
+.ck-content{
+    padding-left: 0px !important;
+}
+.ck-toolbar{
+    padding-left: 0px !important;
+    background-color: white !important;
+    border: none !important; 
+    box-shadow: none !important;
+}
+div.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
+    outline: none;
+    border: none !important; 
+    box-shadow: none !important;
+}
+
+.ck.ck-editor__editable>.ck-placeholder::before {
+    font-size: 20px;
+}
+
+.ck.ck-editor__top.ck-reset_all {
+    z-index: 10;
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    top: 70px !important;
+}
+
+.ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
+    /* position: unset; */
+    top: 70px !important;
+    border: none !important; 
+    box-shadow: none !important;
+}
+
+/* .img-blur {
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+}
+
+.border-char {
+    -webkit-text-stroke: 1px #e1e1e1;
+}
+
+.bg-opacity {
+    background-color: black;
+    opacity: 0.2;
+} */
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.shadow-txt {
+    text-shadow: 2px 2px 5px grey !important;
+}
+
+.anime-shadow-txt {
+    /* font-size: 20px; */
+    color: white;
+    animation-name: anime-shadow !important;
+    animation-duration: 4s;
+}
+
+@keyframes anime-shadow {
+    from {
+        text-shadow: 0px 0px 0px grey;
+    }
+
+    to {
+        text-shadow: 2px 2px 5px grey;
+    }
+}
+
+.margin-0 {
+    margin: 0px !important;
+}
+
+.right-margin-10 {
+    margin-right: 10px;
+}
+
+.left-margin-3-pt {
+    margin-left: -3% !important;
+}
+
+.top-margin-10 {
+    margin-top: 10px;
+}
+
+.top-margin-20 {
+    margin-top: 20px;
+}
+
+
+.side-padding-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.side-padding-5 {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.top-padding-20 {
+    padding-top: 20px;
+}
+
+.bottom-padding-20 {
+    padding-bottom: 20px;
+}
+
+.bottom-padding-0 {
+    padding-bottom: 0px;
+}
+
+
+
+.font-size-11 {
+    font-size: 11px;
+}
+
+.font-size-13 {
+    font-size: 13px;
+}
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.img-txt-centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.img-container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.img-full {
+    width: 100%;
+}
+
+.img-w-100 {
+    width: 100px;
+}
+
+.sticky-layer {
+    position: -webkit-sticky !important;
+    /* Safari & IE */
+    position: sticky !important;
+    top: 0;
+
+}
+
+i.material-icons {
+    vertical-align: middle;
+}
+
+.vertical-align-center {
+    vertical-align: middle !important;
+}
+
+.line-height-btn {
+    height: 36px;
+    line-height: 36px;
+}
+
+.search-btn {
+    width: 70px;
+    padding: 0px;
+}
+
+.border-btn {
+    border: 1px solid teal;
+
+}
+
+.left-line {
+    border-left: 3px solid gainsboro;
+    margin-left: 20px;
+    margin-top: 35px;
+}
+
+.left-line-container {
+    padding-left: 30px !important;
+}
+
+.left-line-day {
+    margin-left: -25px;
+    margin-top: -15px
+}
+
+.left-line-title {
+    margin-left: -35px;
+}
+
+.left-line-title-icon {
+    border: 2px solid gainsboro;
+}

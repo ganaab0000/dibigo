@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가볼만한곳/맛집/숙박 정보, 나만의 여행일정 | 전국 방방곡곡 디비고</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="./css/materialize.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="./css/dibigo-hj.css" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            $('input#title, #content_txt').characterCounter();
+            $('input#title').focus();
+
+            // $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                firstDay: true,
+                format: 'yyyy-mm-dd',
+                i18n: {
+                    months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                    monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                    weekdays: ["토", "일", "월", "화", "수", "목", "금"],
+                    weekdaysShort: ["토", "일", "월", "화", "수", "목", "금"],
+                    weekdaysAbbrev: ["토", "일", "월", "화", "수", "목", "금"]
+                }
+            });
+
+
+
+        });
+
+    </script>
+</head>
+
+<body class="min-width-500">
+
+
+    <div class="top-padding-20 bottom-padding-20 sticky-layer white z-index-10">
+        <div class="row line-height-btn">
+            <div class="col s0 m1"></div>
+            <div class="col s3 m2 teal-text font-size-20"><i class="material-icons">image</i> DBIGO</div>
+            <div class="col s0 m3 teal-text">Auto Saved</div>
+            <div class="col s9 m5 right-align ">
+                <span class="waves-effect waves-teal btn-flat right-margin-10 teal-text"><i
+                        class="material-icons">done</i> 완료</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i
+                        class="material-icons">help_outline</i> 사용법</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i
+                        class="material-icons">account_circle</i> 계정명</span>
+            </div>
+            <div class="col s0 m1"></div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s0 m1"></div>
+        <div class="col s12 m10">
+
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="title" class="teal-text" type="text" data-length="30">
+                            <label for="title">여행일정 제목</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input id="datetime" type="text" class="datepicker teal-text">
+                            <label for="datetime">일정 시작</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input id="datetime" type="text" class="datepicker teal-text">
+                            <label for="datetime">일정 끝</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="content_txt" class="materialize-textarea" data-length="300"></textarea>
+                            <label for="content_txt">내용</label>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+        </div>
+        <div class="col s0 m1"></div>
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가볼만한곳/맛집/숙박 정보, 나만의 여행일정 | 전국 방방곡곡 디비고</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="./css/materialize.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="./css/dibigo-hj.css" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            $('.materialboxed').materialbox();
+            $('.slider').slider({height:560});
+        });
+    </script>
+</head>
+<body class="min-width-500">
+    <div class="top-padding-20">
+        <div class="row line-height-btn">
+            <div class="col s0 m1"></div>
+            <div class="col s3 m2 teal-text font-size-20"><i class="material-icons">image</i> DBIGO</div>
+            <div class="col s0 m3 teal-text">전국 방방곡곡, 디비고~</div>
+            <div class="col s9 m5 right-align ">
+                <span class="waves-effect waves-teal btn-flat right-margin-10 teal-text"><i class="material-icons">create</i> 일정</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i class="material-icons">help_outline</i> 사용법</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i class="material-icons">account_circle</i> 로그인</span>
+            </div>
+            <div class="col s0 m1"></div>
+        </div>
+    </div>
+    <div class="top-padding-20 row white-text blue-grey darken-2 margin-0">
+        <div class="col s0 m1"></div>
+        <div class="col s12 m10">
+            <div class="row center-align">
+                <div class="col s3 m2">신간</div>
+                <div class="col s3 m2">베스트</div>
+                <div class="col s3 m2">여행꿀팁</div>
+                <div class="col s3 m2">Q&A</div>
+            </div>
+            <div class="row">
+                <div class="col s12 m11">
+                    <input type="text" class="white-text" placeholder="">
+                </div>
+                <div class="col s12 m1 right-align">
+                    <a class="waves-effect waves-light btn-large search-btn timer-width-full"><i
+                            class="material-icons">search</i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col s0 m1"></div>
+    </div>
+    <div class="slider">
+        <ul class="slides">
+            <li>
+                <img src="https://placeimg.com/600/360/spring"> <!-- random image -->
+                <div class="caption center-align shadow-txt">
+                    <h3>This is our big Tagline!</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                </div>
+            </li>
+            <li>
+                <img src="https://placeimg.com/600/360/summer"> <!-- random image -->
+                <div class="caption left-align shadow-txt">
+                    <h3>Left Aligned Caption</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                </div>
+            </li>
+            <li>
+                <img src="https://placeimg.com/600/360/fall"> <!-- random image -->
+                <div class="caption right-align shadow-txt">
+                    <h3>Right Aligned Caption</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                </div>
+            </li>
+            <li>
+                <img src="https://placeimg.com/600/360/winter"> <!-- random image -->
+                <div class="caption center-align shadow-txt">
+                    <h3>This is our big Tagline!</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col s0 m1"></div>
+        <div class="col s12 m10">
+            <div class="row grey-text ">
+                <div class="col s12">전세계 > 추천콘텐츠</div>
+            </div>
+            
+            <div class="section">
+                <h5>신간 여행기</h5>
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="row">
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/1">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/2">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/3">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/4">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/5">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/6">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/7">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/8">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="section">
+                <h5>베스트 여행기</h5>
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="row">
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/11">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/12">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/13">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/14">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/15">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/16">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/17">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/18">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="section">
+                <h5>여행 꿀팁</h5>
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="row">
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/21">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/22">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/23">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/24">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/25">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/26">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/27">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://placeimg.com/200/200/28">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title">Title</span>
+                                        <p class="grey-text">Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s0 m1"></div>
+    </div>
+
+
+
+    <div class="top-padding-20 row white-text blue-grey darken-2 margin-0">
+        <div class="col s0 m1"></div>
+        <div class="col s12 m10">
+            <div class="row">
+                <span class="right-margin-10">서비스 소개</span>
+                <span class="right-margin-10">사용법</span>
+                <span class="right-margin-10">이용문의</span>
+                <span class="right-margin-10">이용약관</span>
+                <span class="right-margin-10">개인정보 취급방침</span>
+                <span class="right-margin-10">사이트맵</span>
+            </div>
+            <div class="row">
+                <p>상호명 : (주)디비고 | 대표 : ㅇㅇㅇ | 개인정보책임자 : ㅇㅇㅇ</p>
+                <p>사업자등록번호 : 000-00-00000 | 통신판매업신고번호 : 제 2020-서울용산-0000 호 | 사업자정보확인</p>
+                <p>Copyright © 2020-2021, DIBIGO. All rights reserved.</p>
+            </div>
+        </div>
+        <div class="col s0 m1"></div>
+    </div>
+</body>
+</html>

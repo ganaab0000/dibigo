@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 | 전국 방방곡곡 디비고</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="./css/materialize.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="./css/dibigo-hj.css" rel="stylesheet">
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        $(function () {
+
+            //store for fetch
+            state = {};
+
+            //after fetch, and render
+            render();
+
+            //event
+            $(window).resize(function () {
+                render();
+            });
+
+            function render() {
+                renderChart_tmp_2("#my_dataviz_1");
+                renderChart_tmp_1("#my_dataviz_2");
+                renderChart_tmp_1("#my_dataviz_3");
+                renderChart_tmp_2("#my_dataviz_4");
+                renderChart_tmp_2("#my_dataviz_5");
+                renderChart_tmp_2("#my_dataviz_6");
+            }
+            function renderChart_tmp_2(elName) {
+
+                $(elName).empty();
+                var $container = $(elName),
+                    width = $container.width(),
+                    height = $container.width(),
+                    fontSize = (Math.min(width, height) / 4);
+
+                var margin = 80;
+                var svg = d3.select(elName).append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr('viewBox', '0 0 ' + (width + 0) + ' ' + (height + margin + 100))
+                    .append("g");
+
+                // Parse the Data
+                d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function (data) {
+
+                    // X axis
+                    var x = d3.scaleBand()
+                        .range([0, width])
+                        .domain(data.map(function (d) { return d.Country; }))
+                        .padding(0.2);
+                    svg.append("g")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x))
+                        .selectAll("text")
+                        .attr("transform", "translate(-10,0)rotate(-45)")
+                        .style("text-anchor", "end");
+
+                    // Add Y axis
+                    var y = d3.scaleLinear()
+                        .domain([0, 13000])
+                        .range([height, 0]);
+                    svg.append("g")
+                        .call(d3.axisLeft(y));
+
+                    // Bars
+                    svg.selectAll("mybar")
+                        .data(data)
+                        .enter()
+                        .append("rect")
+                        .attr("x", function (d) { return x(d.Country); })
+                        .attr("width", x.bandwidth())
+                        .attr("fill", "#69b3a2")
+                        // no bar at the beginning thus:
+                        .attr("height", function (d) { return height - y(0); }) // always equal to 0
+                        .attr("y", function (d) { return y(0); })
+
+                    // Animation
+                    svg.selectAll("rect")
+                        .transition()
+                        .duration(800)
+                        .attr("y", function (d) { return y(d.Value); })
+                        .attr("height", function (d) { return height - y(d.Value); })
+                        .delay(function (d, i) { console.log(i); return (i * 100) })
+
+                })
+            }
+            function renderChart_tmp_1(elName) {
+                $(elName).empty();
+                var $container = $(elName),
+                    width = $container.width(),
+                    height = $container.width(),
+                    fontSize = (Math.min(width, height) / 4);
+
+                var margin = 80;
+                var svg = d3.select(elName).append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr('viewBox', '0 0 ' + (width + 0) + ' ' + (height + margin + 100))
+                    .append("g");
+
+                // get the data
+                d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_doubleHist.csv", function (data) {
+
+                    // add the x Axis
+                    var x = d3.scaleLinear()
+                        .domain([-10, 15])
+                        .range([0, width]);
+                    svg.append("g")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x));
+
+                    // add the y Axis
+                    var y = d3.scaleLinear()
+                        .range([height, 0])
+                        .domain([0, 0.12]);
+                    svg.append("g")
+                        .call(d3.axisLeft(y));
+
+                    // Compute kernel density estimation
+                    var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(60))
+                    var density1 = kde(data
+                        .filter(function (d) { return d.type === "variable 1" })
+                        .map(function (d) { return d.value; }))
+                    var density2 = kde(data
+                        .filter(function (d) { return d.type === "variable 2" })
+                        .map(function (d) { return d.value; }))
+
+                    // Plot the area
+                    svg.append("path")
+                        .attr("class", "mypath")
+                        .datum(density1)
+                        .attr("fill", "#69b3a2")
+                        .attr("opacity", ".6")
+                        .attr("stroke", "#000")
+                        .attr("stroke-width", 1)
+                        .attr("stroke-linejoin", "round")
+                        .attr("d", d3.line()
+                            .curve(d3.curveBasis)
+                            .x(function (d) { return x(d[0]); })
+                            .y(function (d) { return y(d[1]); })
+                        );
+
+                    // Plot the area
+                    svg.append("path")
+                        .attr("class", "mypath")
+                        .datum(density2)
+                        .attr("fill", "#404080")
+                        .attr("opacity", ".6")
+                        .attr("stroke", "#000")
+                        .attr("stroke-width", 1)
+                        .attr("stroke-linejoin", "round")
+                        .attr("d", d3.line()
+                            .curve(d3.curveBasis)
+                            .x(function (d) { return x(d[0]); })
+                            .y(function (d) { return y(d[1]); })
+                        );
+
+                });
+
+                // Handmade legend
+                svg.append("circle").attr("cx", 10).attr("cy", height + 50).attr("r", 6).style("fill", "#69b3a2")
+                svg.append("circle").attr("cx", 10).attr("cy", height + 80).attr("r", 6).style("fill", "#404080")
+                svg.append("text").attr("x", 10 + 20).attr("y", height + 50).text("variable A").style("font-size", "15px").attr("alignment-baseline", "middle")
+                svg.append("text").attr("x", 10 + 20).attr("y", height + 80).text("variable B").style("font-size", "15px").attr("alignment-baseline", "middle")
+
+                // Function to compute density
+                function kernelDensityEstimator(kernel, X) {
+                    return function (V) {
+                        return X.map(function (x) {
+                            return [x, d3.mean(V, function (v) { return kernel(x - v); })];
+                        });
+                    };
+                }
+                function kernelEpanechnikov(k) {
+                    return function (v) {
+                        return Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k : 0;
+                    };
+                }
+
+
+            }
+
+        });
+    </script>
+</head>
+
+<body class="min-width-500">
+    <div class="top-padding-20">
+        <div class="row line-height-btn">
+            <div class="col s0 m1"></div>
+            <div class="col s3 m2 teal-text font-size-20"><i class="material-icons">image</i> DBIGO</div>
+            <div class="col s0 m3 teal-text">전국 방방곡곡, 디비고~</div>
+            <div class="col s9 m5 right-align ">
+                <span class="waves-effect waves-teal btn-flat right-margin-10 teal-text"></span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i
+                        class="material-icons">help_outline</i> 사용법</span>
+                <span class="waves-effect waves-teal btn-flat right-margin-10"><i
+                        class="material-icons">account_circle</i> 관리자</span>
+            </div>
+            <div class="col s0 m1"></div>
+        </div>
+    </div>
+    <div class="top-padding-20 row white-text blue-grey darken-2">
+        <div class="col s0 m1"></div>
+        <div class="col s12 m10">
+            <div class="row center-align">
+                <div class="col s3 m2">대시보드</div>
+                <div class="col s3 m2">게시물 관리</div>
+                <div class="col s3 m2">사용자 관리</div>
+                <div class="col s3 m2">설정</div>
+            </div>
+            <div class="row">
+                <div class="col s12 m11">
+                    <input type="text" class="white-text" placeholder="">
+                </div>
+                <div class="col s12 m1 right-align">
+                    <a class="waves-effect waves-light btn-large search-btn timer-width-full"><i
+                            class="material-icons">search</i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col s0 m1"></div>
+    </div>
+    <div class="row">
+        <div class="col s0 m1"></div>
+        <div class="col s12 m10">
+            <div class="row grey-text ">
+                <div class="col s12">관리자 > 대시보드</div>
+            </div>
+            <div class="row">
+
+                <!-- <div class="col s12 m2">
+                    <div class="collection">
+                        <a href="#!" class="collection-item active">대시보드</a>
+                        <a href="#!" class="collection-item">게시물 관리</a>
+                        <a href="#!" class="collection-item">사용자 관리</a>
+                        <a href="#!" class="collection-item">설정</a>
+                    </div>
+                </div> -->
+                <div class="col s12 m12">
+
+                    <div class="section">
+                        <h5>시간별 방문자</h5>
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <div id="my_dataviz_1"></div>
+                            </div>
+                            <div class="col s12 m6">
+                                <div id="my_dataviz_2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h5>시간별 글 작성</h5>
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <div id="my_dataviz_3"></div>
+                            </div>
+                            <div class="col s12 m6">
+                                <div id="my_dataviz_4"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h5>가입자 증가추이</h5>
+                        <div class="col s12 m6">
+                            <div id="my_dataviz_5"></div>
+                        </div>
+                        <div class="col s12 m6">
+                            <div id="my_dataviz_6"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col s0 m1"></div>
+    </div>
+    <div class="top-padding-20 row white-text blue-grey darken-2 margin-0">
+        <div class="col s0 m1"></div>
+        <div class="col s12 m10">
+            <div class="row">
+                <span class="right-margin-10">서비스 소개</span>
+                <span class="right-margin-10">사용법</span>
+                <span class="right-margin-10">이용문의</span>
+                <span class="right-margin-10">이용약관</span>
+                <span class="right-margin-10">개인정보 취급방침</span>
+                <span class="right-margin-10">사이트맵</span>
+            </div>
+            <div class="row">
+                <p>상호명 : (주)디비고 | 대표 : ㅇㅇㅇ | 개인정보책임자 : ㅇㅇㅇ</p>
+                <p>사업자등록번호 : 000-00-00000 | 통신판매업신고번호 : 제 2020-서울용산-0000 호 | 사업자정보확인</p>
+            </div>
+        </div>
+        <div class="col s0 m1"></div>
+    </div>
+</body>
+
+</html>
