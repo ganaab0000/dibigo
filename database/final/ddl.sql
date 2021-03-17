@@ -30,15 +30,14 @@ create sequence "seq_subrl_id";
 create sequence "seq_user_id";
    
 -- 테이블 삭제
-drop table "user_tb" cascade constraints;
-drop table "project_tb" cascade constraints;
+drop table "user" cascade constraints;
+drop table "project" cascade constraints;
 drop table "reward" cascade constraints;
 drop table "community" cascade constraints;
 drop table "notice" cascade constraints;
-drop table "follow_tb" cascade constraints;
-drop table "like_tb" cascade constraints;
+drop table "follow" cascade constraints;
+drop table "like" cascade constraints;
 drop table "project_category" cascade constraints;
-drop table "reward_option_category" cascade constraints;
 drop table "community_category" cascade constraints;
 drop table "faq" cascade constraints;
 drop table "review" cascade constraints;
@@ -47,7 +46,7 @@ drop table "reserve_reward" cascade constraints;
 drop table "reserve" cascade constraints;
 drop table "visitor_per_day" cascade constraints;
 drop table "visitor_count_per_day" cascade constraints;
-drop table "blame_tb" cascade constraints;
+drop table "blame" cascade constraints;
 drop table "blame_reply" cascade constraints;
 drop table "auto_login" cascade constraints;
 drop table "reserve_status_category" cascade constraints;
@@ -146,7 +145,7 @@ create table "reserve_status_category" (
 alter table "reserve_status_category" add constraint "reserve_status_category_pk" primary key ( "id" );
 comment on column "auto_login"."auto_login_user_id" is '카테고리 종류 - 대기/결제 완료/취소/배송완료/환불/교환 등';
 
-create table "user_tb" (
+create table "user" (
 	"id" number not null,
 	"email" varchar2(100) not null,
 	"nickname" varchar2(100) not null,
@@ -161,7 +160,7 @@ create table "user_tb" (
 	"profile_img" varchar2(1000) null,
 	"profile_txt" varchar2(1000) null
 );
-alter table "user_tb" add constraint "user_tb_pk" primary key ( "id" );
+alter table "user" add constraint "user_pk" primary key ( "id" );
 
 
 create table "project_category" (
@@ -176,7 +175,7 @@ create table "project_status_category" (
 );
 alter table "project_status_category" add constraint "project_status_category_pk" primary key ( "id" );
 
-create table "project_tb" (
+create table "project" (
 	"id" number not null,
 	"title" varchar2(100) not null,
 	"sub_title" varchar2(200) not null,
@@ -200,15 +199,7 @@ create table "project_tb" (
 	"project_category_id" number not null,
 	"project_status_category_id" number not null
 );
-alter table "project_tb" add constraint "project_tb_pk" primary key ( "id" );
-
-
-create table "reward_option_category" (
-	"id" number not null,
-	"form" varchar2(1000) not null
-);
-alter table "reward_option_category" add constraint "reward_option_category_pk" primary key ( "id" );
-comment on column "reward_option_category"."reword_op_detail" is '리워드 옵션 상세 - user defined';
+alter table "project" add constraint "project_pk" primary key ( "id" );
 
 create table "reward" (
 	"id" number not null,
@@ -248,7 +239,7 @@ create table "community_category" (
 	"id" number not null,
 	"name" varchar2(100) not null
 );
-alter table "community_category" add constraint "community_category" primary key ( "community_category_id" );
+alter table "community_category" add constraint "community_category" primary key ( "id" );
 comment on column "community_category"."name" is '값 종류 - 문의, 응원 등';
 
 create table "community" (
@@ -264,17 +255,17 @@ create table "community" (
 );
 alter table "community" add constraint "community_pk" primary key ( "id" );
 
-create table "follow_tb" (
+create table "follow" (
 	"follow" number not null,
 	"follower" number not null
 );
-alter table "follow_tb" add constraint "follow_tb_pk" primary key ( "follow", "follower" );
+alter table "follow" add constraint "follow_pk" primary key ( "follow", "follower" );
 
-create table "like_tb" (
+create table "like" (
 	"user_id" number not null,
 	"project_id" number not null
 );
-alter table "like_tb" add constraint "like_tb_pk_pk" primary key ( "user_id", "project_id" );
+alter table "like" add constraint "like_pk_pk" primary key ( "user_id", "project_id" );
 
 create table "review" (
 	"id" number not null,
@@ -288,14 +279,14 @@ create table "review" (
 );
 alter table "review" add constraint "review_pk_pk" primary key ( "id" );
 
-create table "blame_tb" (
+create table "blame" (
 	"id" number not null,
 	"date_created" date	default sysdate	not null,
 	"content" varchar2(4000) not null,
 	"project_id" number not null,
 	"user_id" number not null
 );
-alter table "blame_tb" add constraint "blame_tb_pk" primary key ( "id" );
+alter table "blame" add constraint "blame_pk" primary key ( "id" );
 
 create table "blame_reply" (
 	"id" number not null,
@@ -345,30 +336,33 @@ alter table "visitor_count_per_day" add constraint "visitor_count_per_day_pk" pr
 
 
 -- table constraint
--- pk
 -- fk
-alter table "project_tb" add constraint "fk_user_tb_to_project_tb_1" foreign key ( "project_writer" ) references "user_tb" ( "user_id" );
-alter table "project_tb" add constraint "fk_project_category_to_project_tb_1" foreign key ( "project_ct_id" ) references "project_category" ( "project_ct_id" );
-alter table "project_tb" add constraint "fk_project_status_category_to_project_tb_1" foreign key ( "project_st_id" ) references "project_status_category" ( "project_st_id" );
-alter table "reward" add constraint "fk_project_tb_to_reward_1" foreign key ( "reword_ref_pno" ) references "project_tb" ( "project_id" );
-alter table "reward" add constraint "fk_reward_option_category_to_reward_1" foreign key ( "reword_op_id" ) references "reward_option_category" ( "reword_op_id" );
-alter table "community" add constraint "fk_project_tb_to_community_1" foreign key ( "community_ref_pno" ) references "project_tb" ( "project_id" );
-alter table "community" add constraint "fk_user_tb_to_community_1" foreign key ( "community_writer" ) references "user_tb" ( "user_id" );
-alter table "community" add constraint "fk_community_category_to_community_1" foreign key ( "community_category_id" ) references "community_category" ( "community_category_id" );
-alter table "notice" add constraint "fk_user_tb_to_notice_1" foreign key ( "notice_writer" ) references "user_tb" ( "user_id" );
-alter table "follow_tb" add constraint "fk_user_tb_to_follow_tb_1" foreign key ( "follow" ) references "user_tb" ( "user_id" );
-alter table "follow_tb" add constraint "fk_user_tb_to_follow_tb_2" foreign key ( "follower" ) references "user_tb" ( "user_id" );
-alter table "like_tb" add constraint "fk_user_tb_to_like_tb_1" foreign key ( "like_user" ) references "user_tb" ( "user_id" );
-alter table "like_tb" add constraint "fk_project_tb_to_like_tb_1" foreign key ( "like_prj" ) references "project_tb" ( "project_id" );
-alter table "faq" add constraint "fk_user_tb_to_faq_1" foreign key ( "faq_writer" ) references "user_tb" ( "user_id" );
-alter table "review" add constraint "fk_project_tb_to_review_1" foreign key ( "review_ref_pno" ) references "project_tb" ( "project_id" );
-alter table "review" add constraint "fk_user_tb_to_review_1" foreign key ( "review_writer" ) references "user_tb" ( "user_id" );
-alter table "reserve_reward" add constraint "fk_reserve_to_reserve_reward_1" foreign key ( "reserve_id" ) references "reserve" ( "reserve_id" );
-alter table "reserve_reward" add constraint "fk_reward_to_reserve_reward_1" foreign key ( "reward_id" ) references "reward" ( "reward_id" );
-alter table "reserve" add constraint "fk_user_tb_to_reserve_1" foreign key ( "reserve_user" ) references "user_tb" ( "user_id" );
-alter table "visitor_per_day" add constraint "fk_user_tb_to_visitor_per_day_1" foreign key ( "user_id" ) references "user_tb" ( "user_id" );
-alter table "blame_tb" add constraint "fk_project_tb_to_blame_tb_1" foreign key ( "blame_ref_pno" ) references "project_tb" ( "project_id" );
-alter table "blame_tb" add constraint "fk_user_tb_to_blame_tb_1" foreign key ( "blame_writer" ) references "user_tb" ( "user_id" );
-alter table "blame_reply" add constraint "fk_blame_tb_to_blame_reply_1" foreign key ( "blame_rp_ref_rno" ) references "blame_tb" ( "blame_id" );
-alter table "blame_reply" add constraint "fk_user_tb_to_blame_reply_1" foreign key ( "blame_rp_writer" ) references "user_tb" ( "user_id" );
-alter table "auto_login" add constraint "fk_user_tb_to_auto_login_1" foreign key ( "auto_login_user_id" ) references "user_tb" ( "user_id" );
+alter table "project" add constraint "fk_user_to_project_1" foreign key ( "user_id" ) references "user" ( "id" );
+alter table "project" add constraint "fk_project_category_to_project_1" foreign key ( "project_category_id" ) references "project_category" ( "id" );
+alter table "project" add constraint "fk_project_status_category_to_project_1" foreign key ( "project_status_category_id" ) references "project_status_category" ( "id" );
+
+alter table "reward" add constraint "fk_project_to_reward_1" foreign key ( "project_id" ) references "project" ( "id" );
+alter table "community" add constraint "fk_project_to_community_1" foreign key ( "project_id" ) references "project" ( "project_id" );
+alter table "community" add constraint "fk_user_to_community_1" foreign key ( "user_id" ) references "user" ( "user_id" );
+alter table "community" add constraint "fk_community_category_to_community_1" foreign key ( "community_category_id" ) references "community_category" ( "id" );
+
+alter table "notice" add constraint "fk_user_to_notice_1" foreign key ( "user_id" ) references "user" ( "id" );
+alter table "follow" add constraint "fk_user_to_follow_1" foreign key ( "follow" ) references "user" ( "id" );
+alter table "follow" add constraint "fk_user_to_follow_2" foreign key ( "follower" ) references "user" ( "id" );
+
+alter table "like" add constraint "fk_user_to_like_1" foreign key ( "user_id" ) references "user" ( "id" );
+alter table "like" add constraint "fk_project_to_like_1" foreign key ( "project_id" ) references "project" ( "id" );
+
+alter table "faq" add constraint "fk_user_to_faq_1" foreign key ( "user_id" ) references "user" ( "id" );
+alter table "review" add constraint "fk_project_to_review_1" foreign key ( "project_id" ) references "project" ( "id" );
+alter table "review" add constraint "fk_user_to_review_1" foreign key ( "user_id" ) references "user" ( "id" );
+
+alter table "reserve_reward" add constraint "fk_reserve_to_reserve_reward_1" foreign key ( "reserve_id" ) references "reserve" ( "id" );
+alter table "reserve_reward" add constraint "fk_reward_to_reserve_reward_1" foreign key ( "reward_id" ) references "reward" ( "id" );
+alter table "reserve" add constraint "fk_user_to_reserve_1" foreign key ( "user_id" ) references "user" ( "id" );
+alter table "visitor_per_day" add constraint "fk_user_to_visitor_per_day_1" foreign key ( "user_id" ) references "user" ( "id" );
+alter table "blame" add constraint "fk_project_to_blame_1" foreign key ( "project_id" ) references "project" ( "id" );
+alter table "blame" add constraint "fk_user_to_blame_1" foreign key ( "user_id" ) references "user" ( "id" );
+alter table "blame_reply" add constraint "fk_blame_to_blame_reply_1" foreign key ( "blame_id" ) references "blame" ( "id" );
+alter table "blame_reply" add constraint "fk_user_to_blame_reply_1" foreign key ( "user_id" ) references "user" ( "id" );
+alter table "auto_login" add constraint "fk_user_to_auto_login_1" foreign key ( "user_id" ) references "user" ( "id" );
