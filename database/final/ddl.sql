@@ -59,19 +59,19 @@ drop table "coupon" cascade constraints;
 drop table "user_coupon" cascade constraints;
 drop table "oauth" cascade constraints;
 drop table "confirm_email" cascade constraints;
-
-
 -- 테이블 생성
-
+drop table "oauth" cascade constraints;
 create table "oauth" (
 	"id" number not null,
 	"user_id" number not null,
 	"access_token" varchar2(255) not null,
 	"provider" varchar2(255) not null
 );
-alter table "oauth" add constraint "oauth_id_pk" primary key ( "oauth_id_id" );
+alter table "oauth" add constraint "oauth_id_pk" primary key ( "id" );
+drop sequence "oauth_id_seq";
 create sequence "oauth_id_seq";
 
+drop table "confirm_email" cascade constraints;
 create table "confirm_email" (
 	"user_id" number not null,
 	"date_expired" date	default sysdate	not null,
@@ -79,6 +79,7 @@ create table "confirm_email" (
 );
 alter table "confirm_email" add constraint "confirm_email_pk" primary key ( "user_id" );
 
+drop table "file" cascade constraints;
 create table "file"(
 	"id" number not null,
 	"upload_name" varchar2(256) not null,
@@ -88,13 +89,13 @@ create table "file"(
 	"date_created" date	default sysdate	not null
 );
 alter table "file" add constraint "file_pk" primary key ( "id" );
+drop sequence "file_id_seq";
 create sequence "file_id_seq";
 
 create table "file_project"(
 	"file_id" number not null,
-	"board_id" number not null
+	"project_id" number not null
 );
-
 create table "file_user"(
 	"file_id" number not null,
 	"user_id" number not null
@@ -102,18 +103,16 @@ create table "file_user"(
 
 create table "coupon" (
 	"id" number not null,
+	"project_category_id" number not null,
 	"discount_rate" number not null,
-	"category_id" number not null,
 	"date_created" date	default sysdate	not null,
 	"date_updated" date	default sysdate	not null,
 	"date_expired" date	not null
 );
-
 create table "user_coupon" (
-	"id" number not null,
-	"user_coupon_user_id" number not null,
-	"user_coupon_coupon_id" number not null,
-	"used" varchar2(1)	default 'n'	not null,
+	"user_id" number not null,
+	"coupon_id" number not null,
+	"used" varchar2(1)	default 'n'	not null
 );
 
 create table "role" (
@@ -123,28 +122,25 @@ create table "role" (
 alter table "role" add constraint "role_pk" primary key ( "id" );
 comment on table "role" is '권한';
 comment on column "role"."role_authority" is '권한 종류 - 모든/프로젝트/계정/공지사항';
-
 create table "user_role" (
-	"id" number not null,
 	"user_id" number not null,
 	"role_id" number not null
 );
 alter table "user_role" add constraint "user_role_pk" primary key ( "id" );
 comment on table "user_role" is '유저-권한 관계';
-
 create table "auto_login" (
 	"user_id" number not null,
 	"sessionkey" varchar2(500) null,
 	"date_expired" date null
 );
 
+-- 위부터 외래키
 create table "reserve_status_category" (
 	"id" number not null,
 	"reserve_st_detail" varchar2(100) not null
 );
 alter table "reserve_status_category" add constraint "reserve_status_category_pk" primary key ( "id" );
 comment on column "auto_login"."auto_login_user_id" is '카테고리 종류 - 대기/결제 완료/취소/배송완료/환불/교환 등';
-
 create table "user" (
 	"id" number not null,
 	"email" varchar2(100) not null,
@@ -161,20 +157,16 @@ create table "user" (
 	"profile_txt" varchar2(1000) null
 );
 alter table "user" add constraint "user_pk" primary key ( "id" );
-
-
 create table "project_category" (
 	"id" number not null,
 	"name" varchar2(100) not null
 );
 alter table "project_category" add constraint "project_category_pk" primary key ( "id" );
-
 create table "project_status_category" (
 	"id" number not null,
 	"detail" varchar2(100) not null
 );
 alter table "project_status_category" add constraint "project_status_category_pk" primary key ( "id" );
-
 create table "project" (
 	"id" number not null,
 	"title" varchar2(100) not null,
@@ -200,7 +192,6 @@ create table "project" (
 	"project_status_category_id" number not null
 );
 alter table "project" add constraint "project_pk" primary key ( "id" );
-
 create table "reward" (
 	"id" number not null,
 	"price" number not null,
@@ -212,15 +203,13 @@ create table "reward" (
 	"project_id" number not null,
 	"option_form" varchar2(1000)
 );
-alter table "reward" add constraint "reward" primary key ( "reward_id" );
-
+alter table "reward" add constraint "reward" primary key ( "id" );
 create table "reserve_reward" (
 	"reserve_id" number not null,
 	"reward_id" number not null,
 	"reward_sum" number	default 1	not null
 );
 alter table "reserve_reward" add constraint "reserve_reward" primary key ( "reserve_id", "reward_id" );
-
 create table "reserve" (
 	"id" number not null,
 	"billingkey" varchar2(4000) not null,
@@ -233,52 +222,47 @@ create table "reserve" (
 	"user_id" number not null
 );
 alter table "reserve" add constraint "reserve_pk" primary key ( "id" );
-
-
 create table "community_category" (
 	"id" number not null,
 	"name" varchar2(100) not null
 );
 alter table "community_category" add constraint "community_category" primary key ( "id" );
 comment on column "community_category"."name" is '값 종류 - 문의, 응원 등';
-
 create table "community" (
 	"id" number not null,
 	"content" varchar2(4000) not null,
-	"is_deleted" varchar2(1)	default 'y'	not null,
+	"is_deleted" varchar2(1)	default 'n'	not null,
 	"date_created" date	default sysdate	not null,
 	"date_updated" date	default sysdate	not null,
 	"project_id" number not null,
 	"user_id" number not null,
 	"community_category_id" number not null,
-	"parent_id" number not null
+	"parent_id" number
 );
 alter table "community" add constraint "community_pk" primary key ( "id" );
+alter table "community" add constraint "community_to_community_1_fk" foreign key ( "parent_id" ) references "community" ( "id" );
 
 create table "follow" (
 	"follow" number not null,
 	"follower" number not null
 );
 alter table "follow" add constraint "follow_pk" primary key ( "follow", "follower" );
-
 create table "like" (
 	"user_id" number not null,
 	"project_id" number not null
 );
-alter table "like" add constraint "like_pk_pk" primary key ( "user_id", "project_id" );
-
+alter table "like" add constraint "like_pk" primary key ( "user_id", "project_id" );
 create table "review" (
 	"id" number not null,
 	"title" varchar2(300) not null,
 	"content" clob not null,
 	"date_created" date	default sysdate	not null,
 	"date_updated" date	default sysdate	not null,
-	"is_deleted" varchar2(1)	default 'y'	not null,
+	"is_deleted" varchar2(1)	default 'n'	not null,
 	"project_id" number not null,
 	"user_id" number not null
 );
-alter table "review" add constraint "review_pk_pk" primary key ( "id" );
-
+alter table "review" add constraint "review_pk" primary key ( "id" );
 create table "blame" (
 	"id" number not null,
 	"date_created" date	default sysdate	not null,
@@ -287,7 +271,6 @@ create table "blame" (
 	"user_id" number not null
 );
 alter table "blame" add constraint "blame_pk" primary key ( "id" );
-
 create table "blame_reply" (
 	"id" number not null,
 	"content" varchar2(4000) null,
@@ -296,7 +279,6 @@ create table "blame_reply" (
 	"user_id" number not null
 );
 alter table "blame_reply" add constraint "blame_reply_pk" primary key ( "id" );
-
 create table "faq" (
 	"id" number not null,
 	"title" varchar2(300) not null,
@@ -307,8 +289,6 @@ create table "faq" (
 	"user_id" number not null
 );
 alter table "faq" add constraint "faq_pk" primary key ( "id" );
-
-
 create table "notice" (
 	"id" number not null,
 	"title" varchar2(300) not null,
@@ -319,44 +299,34 @@ create table "notice" (
 	"user_id" number not null
 );
 alter table "notice" add constraint "notice_pk" primary key ( "id" );
-
 create table "visitor_per_day" (
 	"date_visited" date	default sysdate	not null,
 	"user_id" number not null
 );
 alter table "visitor_per_day" add constraint "visitor_per_day_pk" primary key ( "date_visited", "user_id" );
-
 create table "visitor_count_per_day" (
 	"date_visited" date	default sysdate	not null,
 	"count" number not null
 );
 alter table "visitor_count_per_day" add constraint "visitor_count_per_day_pk" primary key ( "date_visited" );
 
-
-
-
 -- table constraint
 -- fk
 alter table "project" add constraint "fk_user_to_project_1" foreign key ( "user_id" ) references "user" ( "id" );
 alter table "project" add constraint "fk_project_category_to_project_1" foreign key ( "project_category_id" ) references "project_category" ( "id" );
 alter table "project" add constraint "fk_project_status_category_to_project_1" foreign key ( "project_status_category_id" ) references "project_status_category" ( "id" );
-
 alter table "reward" add constraint "fk_project_to_reward_1" foreign key ( "project_id" ) references "project" ( "id" );
 alter table "community" add constraint "fk_project_to_community_1" foreign key ( "project_id" ) references "project" ( "project_id" );
 alter table "community" add constraint "fk_user_to_community_1" foreign key ( "user_id" ) references "user" ( "user_id" );
 alter table "community" add constraint "fk_community_category_to_community_1" foreign key ( "community_category_id" ) references "community_category" ( "id" );
-
 alter table "notice" add constraint "fk_user_to_notice_1" foreign key ( "user_id" ) references "user" ( "id" );
 alter table "follow" add constraint "fk_user_to_follow_1" foreign key ( "follow" ) references "user" ( "id" );
 alter table "follow" add constraint "fk_user_to_follow_2" foreign key ( "follower" ) references "user" ( "id" );
-
 alter table "like" add constraint "fk_user_to_like_1" foreign key ( "user_id" ) references "user" ( "id" );
 alter table "like" add constraint "fk_project_to_like_1" foreign key ( "project_id" ) references "project" ( "id" );
-
 alter table "faq" add constraint "fk_user_to_faq_1" foreign key ( "user_id" ) references "user" ( "id" );
 alter table "review" add constraint "fk_project_to_review_1" foreign key ( "project_id" ) references "project" ( "id" );
 alter table "review" add constraint "fk_user_to_review_1" foreign key ( "user_id" ) references "user" ( "id" );
-
 alter table "reserve_reward" add constraint "fk_reserve_to_reserve_reward_1" foreign key ( "reserve_id" ) references "reserve" ( "id" );
 alter table "reserve_reward" add constraint "fk_reward_to_reserve_reward_1" foreign key ( "reward_id" ) references "reward" ( "id" );
 alter table "reserve" add constraint "fk_user_to_reserve_1" foreign key ( "user_id" ) references "user" ( "id" );
