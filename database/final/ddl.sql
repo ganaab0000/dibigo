@@ -1,422 +1,374 @@
 -- 시퀀스 삭제
 -- drop sequence member_seq;
-DROP SEQUENCE "SEQ_ALA_NO";
-DROP SEQUENCE "SEQ_ANS_NO";
-DROP SEQUENCE "SEQ_FAQ_NO";
-DROP SEQUENCE "SEQ_MNO";
-DROP SEQUENCE "SEQ_NOT_NO";
-DROP SEQUENCE "SEQ_PROJ_NO";
-DROP SEQUENCE "SEQ_PROJ_RV_NO";
-DROP SEQUENCE "SEQ_REP_NO";
-DROP SEQUENCE "SEQ_RES_NO";
-DROP SEQUENCE "SEQ_RPL_NO";
-DROP SEQUENCE "SEQ_RWD_NO";
-DROP SEQUENCE "SEQ_SUBRL_NO";
-DROP SEQUENCE "SEQ_USER_NO";
+drop sequence "seq_ala_id";
+drop sequence "seq_ans_id";
+drop sequence "seq_faq_id";
+drop sequence "seq_mno";
+drop sequence "seq_not_id";
+drop sequence "seq_proj_id";
+drop sequence "seq_proj_rv_id";
+drop sequence "seq_rep_id";
+drop sequence "seq_res_id";
+drop sequence "seq_rpl_id";
+drop sequence "seq_rwd_id";
+drop sequence "seq_subrl_id";
+drop sequence "seq_user_id";
 -- 시퀀스 생성
--- CREATE SEQUENCE "SEQ_ALA_NO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 79 NOCACHE  NOORDER  NOCYCLE ;
-CREATE SEQUENCE "SEQ_ALA_NO";
-CREATE SEQUENCE "SEQ_ANS_NO";
-CREATE SEQUENCE "SEQ_FAQ_NO";
-CREATE SEQUENCE "SEQ_MNO";
-CREATE SEQUENCE "SEQ_NOT_NO";
-CREATE SEQUENCE "SEQ_PROJ_NO";
-CREATE SEQUENCE "SEQ_PROJ_RV_NO";
-CREATE SEQUENCE "SEQ_REP_NO";
-CREATE SEQUENCE "SEQ_RES_NO";
-CREATE SEQUENCE "SEQ_RPL_NO";
-CREATE SEQUENCE "SEQ_RWD_NO";
-CREATE SEQUENCE "SEQ_SUBRL_NO";
-CREATE SEQUENCE "SEQ_USER_NO";
+-- create sequence "seq_ala_id"  minvalue 1 maxvalue 9999999999999999999999999999 increment by 1 start with 79 nocache  noorder  nocycle ;
+create sequence "seq_ala_id";
+create sequence "seq_ans_id";
+create sequence "seq_faq_id";
+create sequence "seq_mno";
+create sequence "seq_not_id";
+create sequence "seq_proj_id";
+create sequence "seq_proj_rv_id";
+create sequence "seq_rep_id";
+create sequence "seq_res_id";
+create sequence "seq_rpl_id";
+create sequence "seq_rwd_id";
+create sequence "seq_subrl_id";
+create sequence "seq_user_id";
    
 -- 테이블 삭제
-DROP TABLE "USER_TB" CASCADE CONSTRAINTS;
-DROP TABLE "PROJECT_TB" CASCADE CONSTRAINTS;
-DROP TABLE "REWARD" CASCADE CONSTRAINTS;
-DROP TABLE "COMMUNITY" CASCADE CONSTRAINTS;
-DROP TABLE "NOTICE" CASCADE CONSTRAINTS;
-DROP TABLE "FOLLOW_TB" CASCADE CONSTRAINTS;
-DROP TABLE "LIKE_TB" CASCADE CONSTRAINTS;
-DROP TABLE "PROJECT_CATEGORY" CASCADE CONSTRAINTS;
-DROP TABLE "REWARD_OPTION" CASCADE CONSTRAINTS;
-DROP TABLE "COMMUNITY_CATEGORY" CASCADE CONSTRAINTS;
-DROP TABLE "FAQ" CASCADE CONSTRAINTS;
-DROP TABLE "REVIEW" CASCADE CONSTRAINTS;
-DROP TABLE "PROJECT_STATUS" CASCADE CONSTRAINTS;
-DROP TABLE "RESERVE_REWARD" CASCADE CONSTRAINTS;
-DROP TABLE "RESERVE" CASCADE CONSTRAINTS;
-DROP TABLE "VISIT_PER_DAY" CASCADE CONSTRAINTS;
-DROP TABLE "VISIT_TOTAL" CASCADE CONSTRAINTS;
-DROP TABLE "BLAME_TB" CASCADE CONSTRAINTS;
-DROP TABLE "BLAME_COMMUNITY" CASCADE CONSTRAINTS;
-DROP TABLE "AUTO_LOGIN" CASCADE CONSTRAINTS;
-DROP TABLE "RESERVE_STATUS_CATEGORY" CASCADE CONSTRAINTS;
-DROP TABLE "ROLE" CASCADE CONSTRAINTS;
-DROP TABLE "USER_ROLE" CASCADE CONSTRAINTS;
-DROP TABLE "FILE" CASCADE CONSTRAINTS;
-DROP TABLE "FILE_PROJECT" CASCADE CONSTRAINTS;
-DROP TABLE "FILE_USER" CASCADE CONSTRAINTS;
-DROP TABLE "COUPON" CASCADE CONSTRAINTS;
-DROP TABLE "USER_COUPON" CASCADE CONSTRAINTS;
-DROP TABLE "OAUTH_ID" CASCADE CONSTRAINTS;
-DROP TABLE "CONFIRM_EMAIL" CASCADE CONSTRAINTS;
+drop table "user_tb" cascade constraints;
+drop table "project_tb" cascade constraints;
+drop table "reward" cascade constraints;
+drop table "community" cascade constraints;
+drop table "notice" cascade constraints;
+drop table "follow_tb" cascade constraints;
+drop table "like_tb" cascade constraints;
+drop table "project_category" cascade constraints;
+drop table "reward_option_category" cascade constraints;
+drop table "community_category" cascade constraints;
+drop table "faq" cascade constraints;
+drop table "review" cascade constraints;
+drop table "project_status_category" cascade constraints;
+drop table "reserve_reward" cascade constraints;
+drop table "reserve" cascade constraints;
+drop table "visitor_per_day" cascade constraints;
+drop table "visitor_count_per_day" cascade constraints;
+drop table "blame_tb" cascade constraints;
+drop table "blame_reply" cascade constraints;
+drop table "auto_login" cascade constraints;
+drop table "reserve_status_category" cascade constraints;
+drop table "role" cascade constraints;
+drop table "user_role" cascade constraints;
+drop table "file" cascade constraints;
+drop table "file_project" cascade constraints;
+drop table "file_user" cascade constraints;
+drop table "coupon" cascade constraints;
+drop table "user_coupon" cascade constraints;
+drop table "oauth" cascade constraints;
+drop table "confirm_email" cascade constraints;
 
 
 -- 테이블 생성
 
-CREATE TABLE "OAUTH_ID" (
-	"OAUTH_ID_NO"	NUMBER		NOT NULL,
-	"OAUTH_ID_USER_ID"	NUMBER		NOT NULL,
-	"OAUTH_ID_ACCESS_TOKEN"	VARCHAR2(255)		NOT NULL,
-	"OAUTH_ID_PROVIDER"	VARCHAR2(255)		NOT NULL
+create table "oauth" (
+	"id" number not null,
+	"user_id" number not null,
+	"access_token" varchar2(255) not null,
+	"provider" varchar2(255) not null
 );
-ALTER TABLE "OAUTH_ID" ADD CONSTRAINT "PK_OAUTH_ID" PRIMARY KEY ( "OAUTH_ID_NO" );
+alter table "oauth" add constraint "oauth_id_pk" primary key ( "oauth_id_id" );
+create sequence "oauth_id_seq";
 
-CREATE TABLE "CONFIRM_EMAIL" (
-	"USER_NO"	NUMBER		NOT NULL,
-	"DATE_EXPIRED"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"SECURED_KEY"	VARCHAR2(255)	NOT NULL
+create table "confirm_email" (
+	"user_id" number not null,
+	"date_expired" date	default sysdate	not null,
+	"secured_key" varchar2(255)	not null
 );
-ALTER TABLE "CONFIRM_EMAIL" ADD CONSTRAINT "PK_CONFIRM_EMAIL" PRIMARY KEY ( "USER_NO" );
+alter table "confirm_email" add constraint "confirm_email_pk" primary key ( "user_id" );
 
-CREATE TABLE "FILE"(
-	"FILE_NO" NUMBER PRIMARY KEY,
-	"UPLOAD_NAME" VARCHAR2(256) NOT NULL,
-	"SAVE_NAME" VARCHAR2(256) NOT NULL UNIQUE, 
-	"FILE_SIZE" NUMBER DEFAULT 0, 
-	"FILE_TYPE" VARCHAR2(256)
+create table "file"(
+	"id" number not null,
+	"upload_name" varchar2(256) not null,
+	"save_name" varchar2(256) not null unique, 
+	"file_size" number default 0, 
+	"file_type" varchar2(256),
+	"date_created" date	default sysdate	not null
 );
--- CREATE SEQUENCE TIP_TMP_FILE_SEQ;
+alter table "file" add constraint "file_pk" primary key ( "id" );
+create sequence "file_id_seq";
 
-CREATE TABLE "FILE_PROJECT"(
-	"FILE_NO" NUMBER NOT NULL,
-	"BOARD_NO" NUMBER NOT NULL
-);
-
-CREATE TABLE "FILE_USER"(
-	"FILE_NO" NUMBER NOT NULL,
-	"USER_NO" NUMBER NOT NULL
+create table "file_project"(
+	"file_id" number not null,
+	"board_id" number not null
 );
 
-
-CREATE TABLE "COUPON" (
-	"COUPON_NO"	NUMBER		NOT NULL,
-	"RATE"	NUMBER		NOT NULL,
-	"CATEGORY_ID"	NUMBER		NOT NULL,
-	"CREATEDAT"	NUMBER		NOT NULL,
-	"MODIFIEDAT"	NUMBER		NOT NULL,
-	"EXPIREDAT"	NUMBER		NOT NULL
+create table "file_user"(
+	"file_id" number not null,
+	"user_id" number not null
 );
 
-CREATE TABLE "USER_COUPON" (
-	"USER_COUPON_NO"	NUMBER		NOT NULL,
-	"USER_COUPON_USER_NO"	NUMBER		NOT NULL,
-	"USER_COUPON_COUPON_NO"	NUMBER		NOT NULL,
-	"USED"	NUMBER		NOT NULL
+create table "coupon" (
+	"id" number not null,
+	"discount_rate" number not null,
+	"category_id" number not null,
+	"date_created" date	default sysdate	not null,
+	"date_updated" date	default sysdate	not null,
+	"date_expired" date	not null
 );
 
-CREATE TABLE "ROLE" (
-	"ROLE_NO"	NUMBER		NOT NULL,
-	"ROLE_AUTHORITY"	VARCHAR2(255)		NOT NULL
+create table "user_coupon" (
+	"id" number not null,
+	"user_coupon_user_id" number not null,
+	"user_coupon_coupon_id" number not null,
+	"used" varchar2(1)	default 'n'	not null,
 );
-ALTER TABLE "ROLE" ADD CONSTRAINT "PK_ROLE" PRIMARY KEY ( "ROLE_NO" );
-COMMENT ON TABLE "ROLE" IS '관리자 권한';
-COMMENT ON COLUMN "ROLE"."ROLE_AUTHORITY" IS '모든/프로젝트/계정/공지사항';
 
-CREATE TABLE "USER_ROLE" (
-	"USER_ROLE_NO"	NUMBER		NOT NULL,
-	"USER_ROLE_USER_NO"	NUMBER		NOT NULL,
-	"USER_ROLE_ROLE_NO"	NUMBER		NOT NULL,
+create table "role" (
+	"id" number not null,
+	"role_authority" varchar2(255) not null
 );
-ALTER TABLE "USER_ROLE" ADD CONSTRAINT "PK_USER_ROLE" PRIMARY KEY ( "USER_ROLE_NO" );
-COMMENT ON TABLE "USER_ROLE" IS '유저-권한 관계';
+alter table "role" add constraint "role_pk" primary key ( "id" );
+comment on table "role" is '권한';
+comment on column "role"."role_authority" is '권한 종류 - 모든/프로젝트/계정/공지사항';
 
-CREATE TABLE "AUTO_LOGIN" (
-	"AUTO_LOGIN_USER_NO"	NUMBER		NOT NULL,
-	"AUTO_LOGIN_SESSIONKEY"	VARCHAR2(500)		NULL,
-	"AUTO_LOGIN_EXPIRYDATE"	DATE		NULL
+create table "user_role" (
+	"id" number not null,
+	"user_id" number not null,
+	"role_id" number not null
 );
-ALTER TABLE "AUTO_LOGIN" ADD CONSTRAINT "PK_AUTO_LOGIN" PRIMARY KEY ( "AUTO_LOGIN_USER_NO" );
-COMMENT ON COLUMN "AUTO_LOGIN"."AUTO_LOGIN_USER_NO" IS '자동로그인할 유저 번호';
-COMMENT ON COLUMN "AUTO_LOGIN"."AUTO_LOGIN_SESSIONKEY" IS '세션키 저장하는 컬럼';
-COMMENT ON COLUMN "AUTO_LOGIN"."AUTO_LOGIN_EXPIRYDATE" IS '세션키 만료되는 날짜';
+alter table "user_role" add constraint "user_role_pk" primary key ( "id" );
+comment on table "user_role" is '유저-권한 관계';
 
-CREATE TABLE "RESERVE_STATUS_CATEGORY" (
-	"RESERVE_ST_NO"	NUMBER		NOT NULL,
-	"RESERVE_ST_DETAIL"	VARCHAR2(100)		NOT NULL
+create table "auto_login" (
+	"user_id" number not null,
+	"sessionkey" varchar2(500) null,
+	"date_expired" date null
 );
-ALTER TABLE "RESERVE_STATUS_CATEGORY" ADD CONSTRAINT "PK_RESERVE_STATUS_CATEGORY" PRIMARY KEY ( "RESERVE_ST_NO" );
-COMMENT ON COLUMN "AUTO_LOGIN"."AUTO_LOGIN_USER_NO" IS '주문 예약/결제 완료/예약 취소';
 
-CREATE TABLE "USER_TB" (
-	"USER_NO"	NUMBER		NOT NULL,
-	"USER_EMAIL"	VARCHAR2(100)		NOT NULL,
-	"USER_NICKNAME"	VARCHAR2(100)		NOT NULL,
-	"USER_PWD"	VARCHAR2(100)		NOT NULL,
-	"USER_EMAIL_AUTH"	VARCHAR2(1)	DEFAULT 'N'	NOT NULL,
-	"USER_STATUS"	VARCHAR2(1)	DEFAULT 'Y'	NOT NULL,
-	"USER_LOGIN_DATE"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"USER_DATE_CREATED"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"USER_DATE_UPDATED"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"USER_ADDR"	VARCHAR2(1000)		NULL,
-	"USER_PHONE"	VARCHAR2(100)		NULL,
-	"USER_PROFILE_IMG"	VARCHAR2(1000)		NULL,
-	"USER_PROFILE_TXT"	VARCHAR2(1000)		NULL
+create table "reserve_status_category" (
+	"id" number not null,
+	"reserve_st_detail" varchar2(100) not null
 );
-ALTER TABLE "USER_TB" ADD CONSTRAINT "PK_USER_TB" PRIMARY KEY ( "USER_NO" );
-COMMENT ON COLUMN "USER_TB"."USER_NO" IS 'SEQ_USER_NO';
-COMMENT ON COLUMN "USER_TB"."USER_EMAIL_AUTH" IS '이메일인증시 Y /EMAIL_AUTH';
-COMMENT ON COLUMN "USER_TB"."USER_STATUS" IS '탈퇴시 N';
-COMMENT ON COLUMN "USER_TB"."USER_DATE_CREATED" IS 'ENROLL_DATE/가입일자';
-COMMENT ON COLUMN "USER_TB"."USER_DATE_UPDATED" IS 'MODIFY_DATE/수정일자';
-COMMENT ON COLUMN "USER_TB"."USER_ADDR" IS 'ADDRESS/주소';
-COMMENT ON COLUMN "USER_TB"."USER_PROFILE_IMG" IS '프로필 이미지';
-COMMENT ON COLUMN "USER_TB"."USER_PROFILE_IMG" IS '프로필 글';
+alter table "reserve_status_category" add constraint "reserve_status_category_pk" primary key ( "id" );
+comment on column "auto_login"."auto_login_user_id" is '카테고리 종류 - 대기/결제 완료/취소/배송완료/환불/교환 등';
 
-
-
-CREATE TABLE "PROJECT_TB" (
-	"PROJECT_NO"	NUMBER		NOT NULL,
-	"PROJECT_TITLE"	VARCHAR2(100)		NOT NULL,
-	"PROJECT_STITLE"	VARCHAR2(200)		NOT NULL,
-	"PROJECT_GOAL"	NUMBER		NOT NULL,
-	"PROJECT_THUMB_IMG"	VARCHAR2(400)		NOT NULL,
-	"PROJECT_START_DT"	DATE		NOT NULL,
-	"PROJECT_CLOSE_DT"	DATE		NOT NULL,
-	"PROJECT_HASHTAG"	VARCHAR2(4000)		NULL,
-	"PROJECT_MAIN_IMG"	VARCHAR2(400)		NOT NULL,
-	"PROJECT_SUMMARY"	VARCHAR2(400)		NOT NULL,
-	"PROJECT_STORY"	CLOB		NOT NULL,
-	"PROJECT_AT_NM"	VARCHAR2(100)		NOT NULL,
-	"PROJECT_AT_PF"	VARCHAR2(400)		NOT NULL,
-	"PROJECT_AT_SNS1"	VARCHAR2(100)		NULL,
-	"PROJECT_AT_SNS2"	VARCHAR2(100)		NULL,
-	"PROJECT_AT_CONT"	VARCHAR2(100)		NULL,
-	"PROJECT_AT_EM"	VARCHAR2(100)		NULL,
-	"PROJECT_ER_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"PROJECT_MF_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"PROJECT_WRITER"	NUMBER		NOT NULL,
-	"PROJECT_CT_NO"	NUMBER		NOT NULL,
-	"PROJECT_ST_NO"	NUMBER		NOT NULL
+create table "user_tb" (
+	"id" number not null,
+	"email" varchar2(100) not null,
+	"nickname" varchar2(100) not null,
+	"pwd" varchar2(100) not null,
+	"is_email_verified" varchar2(1) default 'n' not null,
+	"is_deleted" varchar2(1)	default 'n'	not null,
+	"date_loggedin" date default sysdate not null,
+	"date_created" date	default sysdate	not null,
+	"date_updated" date	default sysdate	not null,
+	"address" varchar2(1000) null,
+	"phone" varchar2(100) null,
+	"profile_img" varchar2(1000) null,
+	"profile_txt" varchar2(1000) null
 );
-ALTER TABLE "PROJECT_TB" ADD CONSTRAINT "PK_PROJECT_TB" PRIMARY KEY ( "PROJECT_NO" );
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_NO" IS 'SEQ_PROJ_NO';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_START_DT" IS 'START_DATE/시작일';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_CLOSE_DT" IS 'CLOSE_DATE/종료일';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_AT_NM" IS 'ARTIST_NAME/아티스트이름';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_AT_PF" IS 'ARTIST_PROFILE/아티스트프로필사진';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_AT_SNS1" IS 'ARTIST_SNS';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_AT_SNS2" IS 'ARTIST_SNS';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_AT_CONT" IS 'ARTIST_CONTRACT/아티스트연락처';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_AT_EM" IS 'ARTIST_EMAIL';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_ER_DT" IS 'ENROLL_DATE/프로젝트등록일자';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_MF_DT" IS 'MODIFY_DATE/프로젝트수정일자';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_CT_NO" IS 'CATEGORY_NO/프로젝트카테고리번호';
-COMMENT ON COLUMN "PROJECT_TB"."PROJECT_ST_NO" IS 'STATUS_NO/프로젝트상태번호';
+alter table "user_tb" add constraint "user_tb_pk" primary key ( "id" );
 
-CREATE TABLE "REWARD" (
-	"REWARD_NO"	NUMBER		NOT NULL,
-	"REWARD_PRICE"	NUMBER		NOT NULL,
-	"REWARD_NAME"	VARCHAR2(200)		NOT NULL,
-	"REWARD_EXPLAIN"	VARCHAR2(4000)		NOT NULL,
-	"REWARD_LIMIT"	NUMBER	DEFAULT 0	NOT NULL,
-	"REWARD_SHIP_CDT"	VARCHAR2(1)	DEFAULT 'N'	NOT NULL,
-	"REWARD_SHIP_DT"	DATE		NOT NULL,
-	"REWORD_OP_ADD"	VARCHAR2(4000)		NULL,
-	"REWORD_REF_PNO"	NUMBER		NOT NULL,
-	"REWORD_OP_NO"	NUMBER		NOT NULL
+
+create table "project_category" (
+	"id" number not null,
+	"name" varchar2(100) not null
 );
-ALTER TABLE "REWARD" ADD CONSTRAINT "PK_REWARD" PRIMARY KEY ( "REWARD_NO" );
-COMMENT ON COLUMN "REWARD"."REWARD_NO" IS 'SEQ_RWD_NO';
-COMMENT ON COLUMN "REWARD"."REWARD_EXPLAIN" IS '리워드 설명';
-COMMENT ON COLUMN "REWARD"."REWARD_LIMIT" IS '리워드 제한수량';
-COMMENT ON COLUMN "REWARD"."REWARD_SHIP_CDT" IS 'SHIP_CONDITION/배송조건';
-COMMENT ON COLUMN "REWARD"."REWARD_SHIP_DT" IS 'SHIP_DATE/배송예정일';
+alter table "project_category" add constraint "project_category_pk" primary key ( "id" );
 
-CREATE TABLE "COMMUNITY" (
-	"COMMUNITY_NO"	NUMBER		NOT NULL,
-	"COMMUNITY_CONTENT"	VARCHAR2(4000)		NOT NULL,
-	"COMMUNITY_STATUS"	VARCHAR2(1)	DEFAULT 'Y'	NOT NULL,
-	"COMMUNITY_WRI_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"COMMUNITY_MODI_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"COMMUNITY_REF_PNO"	NUMBER		NOT NULL,
-	"COMMUNITY_WRITER"	NUMBER		NOT NULL,
-	"COMMUNITY_CATEGORY_NO"	NUMBER		NOT NULL,
-	"COMMUNITY_PARENT_NO"	NUMBER		NOT NULL
+create table "project_status_category" (
+	"id" number not null,
+	"detail" varchar2(100) not null
 );
-ALTER TABLE "COMMUNITY" ADD CONSTRAINT "PK_COMMUNITY" PRIMARY KEY ( "COMMUNITY_NO" );
-COMMENT ON COLUMN "COMMUNITY"."COMMUNITY_NO" IS 'SEQ_RPL_NO';
-COMMENT ON COLUMN "COMMUNITY"."COMMUNITY_STATUS" IS 'Y/N';
-COMMENT ON COLUMN "COMMUNITY"."COMMUNITY_WRI_DT" IS 'COMMUNITY_WRITE_DATE/ 댓글작성일';
-COMMENT ON COLUMN "COMMUNITY"."COMMUNITY_MODI_DT" IS 'COMMUNITY_MODIFY_DATE/댓글수정일';
+alter table "project_status_category" add constraint "project_status_category_pk" primary key ( "id" );
 
-CREATE TABLE "NOTICE" (
-	"NOTICE_NO"	NUMBER		NOT NULL,
-	"NOTICE_TITLE"	VARCHAR2(300)		NOT NULL,
-	"NOTICE_CONTENT"	CLOB		NOT NULL,
-	"NOTICE_ER_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"NOTICE_MF_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"NOTICE_STATUS"	VARCHAR2(1)	DEFAULT 'Y'	NOT NULL,
-	"NOTICE_WRITER"	NUMBER		NOT NULL
+create table "project_tb" (
+	"id" number not null,
+	"title" varchar2(100) not null,
+	"sub_title" varchar2(200) not null,
+	"target_amount" number not null,
+	"date_project_started" date not null,
+	"date_project_closed" date not null,
+	"hashtag" varchar2(4000) null,
+	"thumb_img" varchar2(400) not null,
+	"main_img" varchar2(400) not null,
+	"summary" varchar2(400) not null,
+	"story" clob not null,
+	"writer_name" varchar2(100) not null,
+	"writer_profile_img" varchar2(400) not null,
+	"writer_sns_instagram" varchar2(100) null,
+	"writer_sns_facebook" varchar2(100) null,
+	"writer_phone" varchar2(100) null,
+	"writer_email" varchar2(100) null,
+	"date_created" date	default sysdate	not null,
+	"date_updated" date	default sysdate	not null,
+	"user_id" number not null,
+	"project_category_id" number not null,
+	"project_status_category_id" number not null
 );
-ALTER TABLE "NOTICE" ADD CONSTRAINT "PK_NOTICE" PRIMARY KEY ( "NOTICE_NO" );
-COMMENT ON COLUMN "NOTICE"."NOTICE_NO" IS 'SEQ_NOT_NO';
-COMMENT ON COLUMN "NOTICE"."NOTICE_ER_DT" IS 'ENROLL_DATE/작성일';
-COMMENT ON COLUMN "NOTICE"."NOTICE_MF_DT" IS 'MODIFY_DATE/수정일';
+alter table "project_tb" add constraint "project_tb_pk" primary key ( "id" );
 
-CREATE TABLE "FOLLOW_TB" (
-	"FOLLOW"	NUMBER		NOT NULL,
-	"FOLLOWER"	NUMBER		NOT NULL
+
+create table "reward_option_category" (
+	"id" number not null,
+	"form" varchar2(1000) not null
 );
-ALTER TABLE "FOLLOW_TB" ADD CONSTRAINT "PK_FOLLOW_TB" PRIMARY KEY ( "FOLLOW", "FOLLOWER" );
+alter table "reward_option_category" add constraint "reward_option_category_pk" primary key ( "id" );
+comment on column "reward_option_category"."reword_op_detail" is '리워드 옵션 상세 - user defined';
 
-CREATE TABLE "LIKE_TB" (
-	"LIKE_USER"	NUMBER		NOT NULL,
-	"LIKE_PRJ"	NUMBER		NOT NULL
+create table "reward" (
+	"id" number not null,
+	"price" number not null,
+	"name" varchar2(200) not null,
+	"detail" varchar2(4000) not null,
+	"max_stock" number	default 0	not null,
+	"is_address_required" varchar2(1)	default 'y'	not null,
+	"date_delivery_estimated" date not null,
+	"project_id" number not null,
+	"option_form" varchar2(1000)
 );
-ALTER TABLE "LIKE_TB" ADD CONSTRAINT "PK_LIKE_TB" PRIMARY KEY ( "LIKE_USER", "LIKE_PRJ" );
+alter table "reward" add constraint "reward" primary key ( "reward_id" );
 
-CREATE TABLE "PROJECT_CATEGORY" (
-	"PROJECT_CT_NO"	NUMBER		NOT NULL,
-	"PROJECT_CT_NAME"	VARCHAR2(100)		NOT NULL
+create table "reserve_reward" (
+	"reserve_id" number not null,
+	"reward_id" number not null,
+	"reward_sum" number	default 1	not null
 );
-ALTER TABLE "PROJECT_CATEGORY" ADD CONSTRAINT "PK_PROJECT_CATEGORY" PRIMARY KEY ( "PROJECT_CT_NO" );
-COMMENT ON COLUMN "PROJECT_CATEGORY"."PROJECT_CT_NO" IS 'CATEGORY_NO/프로젝트카테고리번호';
-COMMENT ON COLUMN "PROJECT_CATEGORY"."PROJECT_CT_NAME" IS 'CATEGORY_NAME/프로젝트카테고리이름';
+alter table "reserve_reward" add constraint "reserve_reward" primary key ( "reserve_id", "reward_id" );
 
-CREATE TABLE "REWARD_OPTION" (
-	"REWORD_OP_NO"	NUMBER		NOT NULL,
-	"REWORD_OP_DETAIL"	VARCHAR2(1000)		NOT NULL
+create table "reserve" (
+	"id" number not null,
+	"billingkey" varchar2(4000) not null,
+	"additional_billings" number	default 0	not null,
+	"date_created" date not null,
+	"receiver_name" varchar2(100) not null,
+	"receiver_phone" number not null,
+	"receiver_address" varchar2(4000) not null,
+	"request_for_delivery" varchar2(300) null,
+	"user_id" number not null
 );
-ALTER TABLE "REWARD_OPTION" ADD CONSTRAINT "PK_REWARD_OPTION" PRIMARY KEY ( "REWORD_OP_NO" );
-COMMENT ON COLUMN "REWARD_OPTION"."REWORD_OP_NO" IS 'OPTION_NO/리워드 옵션 번호';
-COMMENT ON COLUMN "REWARD_OPTION"."REWORD_OP_DETAIL" IS 'OPTION_DETAIL/리워드옵션상세';
+alter table "reserve" add constraint "reserve_pk" primary key ( "id" );
 
-CREATE TABLE "COMMUNITY_CATEGORY" (
-	"COMMUNITY_CATEGORY_NO"	NUMBER		NOT NULL,
-	"PEPLY_CG_NM"	VARCHAR2(100)		NOT NULL
+
+create table "community_category" (
+	"id" number not null,
+	"name" varchar2(100) not null
 );
-ALTER TABLE "COMMUNITY_CATEGORY" ADD CONSTRAINT "PK_COMMUNITY_CATEGORY" PRIMARY KEY ( "COMMUNITY_CATEGORY_NO" );
-COMMENT ON COLUMN "COMMUNITY_CATEGORY"."COMMUNITY_CATEGORY_NO" IS 'CATEGORY_NO/댓글카테고리번호';
-COMMENT ON COLUMN "COMMUNITY_CATEGORY"."PEPLY_CG_NM" IS 'CATEGORY_NAME/댓글카테고리이름';
+alter table "community_category" add constraint "community_category" primary key ( "community_category_id" );
+comment on column "community_category"."name" is '값 종류 - 문의, 응원 등';
 
-
-CREATE TABLE "FAQ" (
-	"FAQ_NO"	NUMBER		NOT NULL,
-	"FAQ_TITLE"	VARCHAR2(300)		NOT NULL,
-	"FAQ_CONTENT"	CLOB		NOT NULL,
-	"FAQ_ENROLL_DATE"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"FAQ_MODIFY_DATE"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"FAQ_STATUS"	VARCHAR2(1)	DEFAULT 'Y'	NOT NULL,
-	"FAQ_WRITER"	NUMBER		NOT NULL
+create table "community" (
+	"id" number not null,
+	"content" varchar2(4000) not null,
+	"is_deleted" varchar2(1)	default 'y'	not null,
+	"date_created" date	default sysdate	not null,
+	"date_updated" date	default sysdate	not null,
+	"project_id" number not null,
+	"user_id" number not null,
+	"community_category_id" number not null,
+	"parent_id" number not null
 );
-ALTER TABLE "FAQ" ADD CONSTRAINT "PK_FAQ" PRIMARY KEY ( "FAQ_NO" );
-COMMENT ON COLUMN "FAQ"."FAQ_NO" IS 'SEQ_FAQ_NO';
+alter table "community" add constraint "community_pk" primary key ( "id" );
 
-CREATE TABLE "REVIEW" (
-	"REVIEW_NO"	NUMBER		NOT NULL,
-	"REVIEW_TITLE"	VARCHAR2(300)		NOT NULL,
-	"REVIEW_CONTENT"	CLOB		NOT NULL,
-	"REVIEW_ER_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"REVIEW_MF_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"REVIEW_STATUS"	VARCHAR2(1)	DEFAULT 'Y'	NOT NULL,
-	"REVIEW_REF_PNO"	NUMBER		NOT NULL,
-	"REVIEW_WRITER"	NUMBER		NOT NULL
+create table "follow_tb" (
+	"follow" number not null,
+	"follower" number not null
 );
-ALTER TABLE "REVIEW" ADD CONSTRAINT "PK_REVIEW" PRIMARY KEY ( "REVIEW_NO" );
-COMMENT ON COLUMN "REVIEW"."REVIEW_NO" IS 'SEQ_PROJ_RV_NO';
+alter table "follow_tb" add constraint "follow_tb_pk" primary key ( "follow", "follower" );
 
-CREATE TABLE "PROJECT_STATUS" (
-	"PROJECT_ST_NO"	NUMBER		NOT NULL,
-	"PROJECT_ST_DETAIL"	VARCHAR2(100)		NOT NULL
+create table "like_tb" (
+	"user_id" number not null,
+	"project_id" number not null
 );
-ALTER TABLE "PROJECT_STATUS" ADD CONSTRAINT "PK_PROJECT_STATUS" PRIMARY KEY ( "PROJECT_ST_NO" );
-COMMENT ON COLUMN "PROJECT_STATUS"."PROJECT_ST_NO" IS 'STATUS_NO/프로젝트상태번호';
-COMMENT ON COLUMN "PROJECT_STATUS"."PROJECT_ST_DETAIL" IS 'STATUS_DETAIL/프로젝트상태상세내용';
+alter table "like_tb" add constraint "like_tb_pk_pk" primary key ( "user_id", "project_id" );
 
-CREATE TABLE "RESERVE_REWARD" (
-	"RESERVE_NO"	NUMBER		NOT NULL,
-	"REWARD_NO"	NUMBER		NOT NULL,
-	"REWARD_SUM"	NUMBER	DEFAULT 1	NOT NULL
+create table "review" (
+	"id" number not null,
+	"title" varchar2(300) not null,
+	"content" clob not null,
+	"date_created" date	default sysdate	not null,
+	"date_updated" date	default sysdate	not null,
+	"is_deleted" varchar2(1)	default 'y'	not null,
+	"project_id" number not null,
+	"user_id" number not null
 );
-ALTER TABLE "RESERVE_REWARD" ADD CONSTRAINT "PK_RESERVE_REWARD" PRIMARY KEY ( "RESERVE_NO", "REWARD_NO" );
-COMMENT ON COLUMN "RESERVE_REWARD"."REWARD_SUM" IS '리워드개수';
+alter table "review" add constraint "review_pk_pk" primary key ( "id" );
 
-CREATE TABLE "RESERVE" (
-	"RESERVE_NO"	NUMBER		NOT NULL,
-	"BILLINGKEY"	VARCHAR2(4000)		NOT NULL,
-	"ADDITIONAL"	NUMBER	DEFAULT 0	NOT NULL,
-	"RESERVE_DATE"	DATE		NOT NULL,
-	"RESERVE_NAME"	VARCHAR2(100)		NOT NULL,
-	"RESERVE_CONTRACT"	NUMBER		NOT NULL,
-	"RESERVE_ADDRESS"	VARCHAR2(4000)		NOT NULL,
-	"RESERVE_REQUEST"	VARCHAR2(300)		NULL,
-	"RESERVE_USER"	NUMBER		NOT NULL
+create table "blame_tb" (
+	"id" number not null,
+	"date_created" date	default sysdate	not null,
+	"content" varchar2(4000) not null,
+	"project_id" number not null,
+	"user_id" number not null
 );
-ALTER TABLE "RESERVE" ADD CONSTRAINT "PK_RESERVE" PRIMARY KEY ( "RESERVE_NO" );
-COMMENT ON COLUMN "RESERVE"."RESERVE_NO" IS 'SEQ_RES_NO';
-COMMENT ON COLUMN "RESERVE"."RESERVE_NAME" IS '배송이름';
-COMMENT ON COLUMN "RESERVE"."RESERVE_CONTRACT" IS '배송전화번호';
-COMMENT ON COLUMN "RESERVE"."RESERVE_ADDRESS" IS '배송주소';
-COMMENT ON COLUMN "RESERVE"."RESERVE_REQUEST" IS '배송시요청사항';
+alter table "blame_tb" add constraint "blame_tb_pk" primary key ( "id" );
 
-CREATE TABLE "VISIT_PER_DAY" (
-	"VISIT_DATE"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"USER_NO"	NUMBER		NOT NULL
+create table "blame_reply" (
+	"id" number not null,
+	"content" varchar2(4000) null,
+	"date_created" date	default sysdate	not null,
+	"blame_id" number not null,
+	"user_id" number not null
 );
-ALTER TABLE "VISIT_PER_DAY" ADD CONSTRAINT "PK_VISIT_PER_DAY" PRIMARY KEY ( "VISIT_DATE", "USER_NO" );
+alter table "blame_reply" add constraint "blame_reply_pk" primary key ( "id" );
 
-CREATE TABLE "VISIT_TOTAL" (
-	"VISIT_DATE"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"TOTAL_COUNT"	NUMBER		NOT NULL
+create table "faq" (
+	"id" number not null,
+	"title" varchar2(300) not null,
+	"content" clob not null,
+	"date_created" date	default sysdate	not null,
+	"date_updated" date	default sysdate	not null,
+	"is_deleted" varchar2(1) default 'n' not null,
+	"user_id" number not null
 );
-ALTER TABLE "VISIT_TOTAL" ADD CONSTRAINT "PK_VISIT_TOTAL" PRIMARY KEY ( "VISIT_DATE" );
--- blame
+alter table "faq" add constraint "faq_pk" primary key ( "id" );
 
-CREATE TABLE "BLAME_TB" (
-	"BLAME_NO"	NUMBER		NOT NULL,
-	"BLAME_DATE"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"BLAME_CONTENT"	VARCHAR2(4000)		NOT NULL,
-	"BLAME_REF_PNO"	NUMBER		NOT NULL,
-	"BLAME_WRITER"	NUMBER		NOT NULL
-);
-ALTER TABLE "BLAME_TB" ADD CONSTRAINT "PK_BLAME_TB" PRIMARY KEY ( "BLAME_NO" );
-COMMENT ON COLUMN "BLAME_TB"."BLAME_NO" IS 'SEQ_REP_NO';
 
-CREATE TABLE "BLAME_COMMUNITY" (
-	"BLAME_RP_NO"	NUMBER		NOT NULL,
-	"BLAME_RP_CONTENT"	VARCHAR2(4000)		NULL,
-	"BLAME_RP_DT"	DATE	DEFAULT SYSDATE	NOT NULL,
-	"BLAME_RP_REF_RNO"	NUMBER		NOT NULL,
-	"BLAME_RP_WRITER"	NUMBER		NOT NULL
+create table "notice" (
+	"id" number not null,
+	"title" varchar2(300) not null,
+	"content" clob not null,
+	"date_created" date	default sysdate	not null,
+	"date_updated" date	default sysdate	not null,
+	"is_deleted" varchar2(1)	default 'n'	not null,
+	"user_id" number not null
 );
-ALTER TABLE "BLAME_COMMUNITY" ADD CONSTRAINT "PK_BLAME_COMMUNITY" PRIMARY KEY ( "BLAME_RP_NO" );
-COMMENT ON COLUMN "BLAME_COMMUNITY"."BLAME_RP_NO" IS 'SEQ_ANS_NO';
--- Table Constraint
--- PK
--- FK
-ALTER TABLE "PROJECT_TB" ADD CONSTRAINT "FK_USER_TB_TO_PROJECT_TB_1" FOREIGN KEY ( "PROJECT_WRITER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "PROJECT_TB" ADD CONSTRAINT "FK_PROJECT_CATEGORY_TO_PROJECT_TB_1" FOREIGN KEY ( "PROJECT_CT_NO" ) REFERENCES "PROJECT_CATEGORY" ( "PROJECT_CT_NO" );
-ALTER TABLE "PROJECT_TB" ADD CONSTRAINT "FK_PROJECT_STATUS_TO_PROJECT_TB_1" FOREIGN KEY ( "PROJECT_ST_NO" ) REFERENCES "PROJECT_STATUS" ( "PROJECT_ST_NO" );
-ALTER TABLE "REWARD" ADD CONSTRAINT "FK_PROJECT_TB_TO_REWARD_1" FOREIGN KEY ( "REWORD_REF_PNO" ) REFERENCES "PROJECT_TB" ( "PROJECT_NO" );
-ALTER TABLE "REWARD" ADD CONSTRAINT "FK_REWARD_OPTION_TO_REWARD_1" FOREIGN KEY ( "REWORD_OP_NO" ) REFERENCES "REWARD_OPTION" ( "REWORD_OP_NO" );
-ALTER TABLE "COMMUNITY" ADD CONSTRAINT "FK_PROJECT_TB_TO_COMMUNITY_1" FOREIGN KEY ( "COMMUNITY_REF_PNO" ) REFERENCES "PROJECT_TB" ( "PROJECT_NO" );
-ALTER TABLE "COMMUNITY" ADD CONSTRAINT "FK_USER_TB_TO_COMMUNITY_1" FOREIGN KEY ( "COMMUNITY_WRITER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "COMMUNITY" ADD CONSTRAINT "FK_COMMUNITY_CATEGORY_TO_COMMUNITY_1" FOREIGN KEY ( "COMMUNITY_CATEGORY_NO" ) REFERENCES "COMMUNITY_CATEGORY" ( "COMMUNITY_CATEGORY_NO" );
-ALTER TABLE "NOTICE" ADD CONSTRAINT "FK_USER_TB_TO_NOTICE_1" FOREIGN KEY ( "NOTICE_WRITER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "FOLLOW_TB" ADD CONSTRAINT "FK_USER_TB_TO_FOLLOW_TB_1" FOREIGN KEY ( "FOLLOW" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "FOLLOW_TB" ADD CONSTRAINT "FK_USER_TB_TO_FOLLOW_TB_2" FOREIGN KEY ( "FOLLOWER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "LIKE_TB" ADD CONSTRAINT "FK_USER_TB_TO_LIKE_TB_1" FOREIGN KEY ( "LIKE_USER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "LIKE_TB" ADD CONSTRAINT "FK_PROJECT_TB_TO_LIKE_TB_1" FOREIGN KEY ( "LIKE_PRJ" ) REFERENCES "PROJECT_TB" ( "PROJECT_NO" );
-ALTER TABLE "FAQ" ADD CONSTRAINT "FK_USER_TB_TO_FAQ_1" FOREIGN KEY ( "FAQ_WRITER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "REVIEW" ADD CONSTRAINT "FK_PROJECT_TB_TO_REVIEW_1" FOREIGN KEY ( "REVIEW_REF_PNO" ) REFERENCES "PROJECT_TB" ( "PROJECT_NO" );
-ALTER TABLE "REVIEW" ADD CONSTRAINT "FK_USER_TB_TO_REVIEW_1" FOREIGN KEY ( "REVIEW_WRITER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "RESERVE_REWARD" ADD CONSTRAINT "FK_RESERVE_TO_RESERVE_REWARD_1" FOREIGN KEY ( "RESERVE_NO" ) REFERENCES "RESERVE" ( "RESERVE_NO" );
-ALTER TABLE "RESERVE_REWARD" ADD CONSTRAINT "FK_REWARD_TO_RESERVE_REWARD_1" FOREIGN KEY ( "REWARD_NO" ) REFERENCES "REWARD" ( "REWARD_NO" );
-ALTER TABLE "RESERVE" ADD CONSTRAINT "FK_USER_TB_TO_RESERVE_1" FOREIGN KEY ( "RESERVE_USER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "VISIT_PER_DAY" ADD CONSTRAINT "FK_USER_TB_TO_VISIT_PER_DAY_1" FOREIGN KEY ( "USER_NO" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "BLAME_TB" ADD CONSTRAINT "FK_PROJECT_TB_TO_BLAME_TB_1" FOREIGN KEY ( "BLAME_REF_PNO" ) REFERENCES "PROJECT_TB" ( "PROJECT_NO" );
-ALTER TABLE "BLAME_TB" ADD CONSTRAINT "FK_USER_TB_TO_BLAME_TB_1" FOREIGN KEY ( "BLAME_WRITER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "BLAME_COMMUNITY" ADD CONSTRAINT "FK_BLAME_TB_TO_BLAME_COMMUNITY_1" FOREIGN KEY ( "BLAME_RP_REF_RNO" ) REFERENCES "BLAME_TB" ( "BLAME_NO" );
-ALTER TABLE "BLAME_COMMUNITY" ADD CONSTRAINT "FK_USER_TB_TO_BLAME_COMMUNITY_1" FOREIGN KEY ( "BLAME_RP_WRITER" ) REFERENCES "USER_TB" ( "USER_NO" );
-ALTER TABLE "AUTO_LOGIN" ADD CONSTRAINT "FK_USER_TB_TO_AUTO_LOGIN_1" FOREIGN KEY ( "AUTO_LOGIN_USER_NO" ) REFERENCES "USER_TB" ( "USER_NO" );
+alter table "notice" add constraint "notice_pk" primary key ( "id" );
+
+create table "visitor_per_day" (
+	"date_visited" date	default sysdate	not null,
+	"user_id" number not null
+);
+alter table "visitor_per_day" add constraint "visitor_per_day_pk" primary key ( "date_visited", "user_id" );
+
+create table "visitor_count_per_day" (
+	"date_visited" date	default sysdate	not null,
+	"count" number not null
+);
+alter table "visitor_count_per_day" add constraint "visitor_count_per_day_pk" primary key ( "date_visited" );
+
+
+
+
+-- table constraint
+-- pk
+-- fk
+alter table "project_tb" add constraint "fk_user_tb_to_project_tb_1" foreign key ( "project_writer" ) references "user_tb" ( "user_id" );
+alter table "project_tb" add constraint "fk_project_category_to_project_tb_1" foreign key ( "project_ct_id" ) references "project_category" ( "project_ct_id" );
+alter table "project_tb" add constraint "fk_project_status_category_to_project_tb_1" foreign key ( "project_st_id" ) references "project_status_category" ( "project_st_id" );
+alter table "reward" add constraint "fk_project_tb_to_reward_1" foreign key ( "reword_ref_pno" ) references "project_tb" ( "project_id" );
+alter table "reward" add constraint "fk_reward_option_category_to_reward_1" foreign key ( "reword_op_id" ) references "reward_option_category" ( "reword_op_id" );
+alter table "community" add constraint "fk_project_tb_to_community_1" foreign key ( "community_ref_pno" ) references "project_tb" ( "project_id" );
+alter table "community" add constraint "fk_user_tb_to_community_1" foreign key ( "community_writer" ) references "user_tb" ( "user_id" );
+alter table "community" add constraint "fk_community_category_to_community_1" foreign key ( "community_category_id" ) references "community_category" ( "community_category_id" );
+alter table "notice" add constraint "fk_user_tb_to_notice_1" foreign key ( "notice_writer" ) references "user_tb" ( "user_id" );
+alter table "follow_tb" add constraint "fk_user_tb_to_follow_tb_1" foreign key ( "follow" ) references "user_tb" ( "user_id" );
+alter table "follow_tb" add constraint "fk_user_tb_to_follow_tb_2" foreign key ( "follower" ) references "user_tb" ( "user_id" );
+alter table "like_tb" add constraint "fk_user_tb_to_like_tb_1" foreign key ( "like_user" ) references "user_tb" ( "user_id" );
+alter table "like_tb" add constraint "fk_project_tb_to_like_tb_1" foreign key ( "like_prj" ) references "project_tb" ( "project_id" );
+alter table "faq" add constraint "fk_user_tb_to_faq_1" foreign key ( "faq_writer" ) references "user_tb" ( "user_id" );
+alter table "review" add constraint "fk_project_tb_to_review_1" foreign key ( "review_ref_pno" ) references "project_tb" ( "project_id" );
+alter table "review" add constraint "fk_user_tb_to_review_1" foreign key ( "review_writer" ) references "user_tb" ( "user_id" );
+alter table "reserve_reward" add constraint "fk_reserve_to_reserve_reward_1" foreign key ( "reserve_id" ) references "reserve" ( "reserve_id" );
+alter table "reserve_reward" add constraint "fk_reward_to_reserve_reward_1" foreign key ( "reward_id" ) references "reward" ( "reward_id" );
+alter table "reserve" add constraint "fk_user_tb_to_reserve_1" foreign key ( "reserve_user" ) references "user_tb" ( "user_id" );
+alter table "visitor_per_day" add constraint "fk_user_tb_to_visitor_per_day_1" foreign key ( "user_id" ) references "user_tb" ( "user_id" );
+alter table "blame_tb" add constraint "fk_project_tb_to_blame_tb_1" foreign key ( "blame_ref_pno" ) references "project_tb" ( "project_id" );
+alter table "blame_tb" add constraint "fk_user_tb_to_blame_tb_1" foreign key ( "blame_writer" ) references "user_tb" ( "user_id" );
+alter table "blame_reply" add constraint "fk_blame_tb_to_blame_reply_1" foreign key ( "blame_rp_ref_rno" ) references "blame_tb" ( "blame_id" );
+alter table "blame_reply" add constraint "fk_user_tb_to_blame_reply_1" foreign key ( "blame_rp_writer" ) references "user_tb" ( "user_id" );
+alter table "auto_login" add constraint "fk_user_tb_to_auto_login_1" foreign key ( "auto_login_user_id" ) references "user_tb" ( "user_id" );
